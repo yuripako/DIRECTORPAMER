@@ -22,6 +22,6 @@ http://localhost/pamervirtual/_____
 
 ==========STORE PROCEDURE RUTA =============================
 
-SP / SP_PRADO /
+SP / SP_HUARACHA /
 
 
