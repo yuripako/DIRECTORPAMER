@@ -1,0 +1,14 @@
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_DIRECTOR_TUTORES_DSA`(
+_codciclo INT,
+_codlinea INT
+)
+BEGIN
+SELECT a.codtutor,b.codsalones, 
+CONCAT(a.apellidos," ",a.nombres) datos
+FROM tutores a
+INNER JOIN salones b on a.codtutor =b.codtutor
+INNER JOIN ccostos c on c.codccostos= b.codccosto
+WHERE b.codciclo=_codciclo  AND c.codlinea=_codlinea
+GROUP BY 1;
+
+END

@@ -15,15 +15,16 @@ class DirectorPamerController extends AppController {
     
     // ----------- METODOS DE EDGAR -----------
 
-    public function directormerito() {
+    public function vistadirector() {
         
         AppController::isAuthorized();
         $this->layout = 'pages';
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/directormerito.js?1"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirector.js?3121"></script>');
     }
+
 
 
 
@@ -66,6 +67,40 @@ class DirectorPamerController extends AppController {
                     // ----------- GET DE EDGAR 51 - 100 -----------
 
 
+                    case 51:
+ 
+                        $cosalones =  $this->request->data['cosalones'];          
+                         $sql = "CALL NPV_DATOSALUMNO_COMBO_SALONES($cosalones)";
+                         exit(AppController::getDataTable($sql));
+                         
+                     break;
+ 
+                     case 52:
+                         // SLIDER SIMULACRO ENTREGA DE CASE
+                         $linea =  $this->request->data['linea']; 
+                         $ciclo =  $this->request->data['ciclo'];                                              
+                     
+                         $sql = "CALL SP_TUTOR_SLIDER_SIM_SALON_CICLO_LINEA($linea,$ciclo)";
+                         exit(AppController::getDataTable($sql));
+                         break;
+ 
+                      case 53:
+ 
+                         $codexamen =  $this->request->data['codexamen'];   
+                         $tipo = $this->request->data['tipo'];   
+                         $codlinea = $this->request->data['codlinea'];  
+                         $codciclo = $this->request->data['codciclo'];     
+                         $sql = "CALL SP_TUTORDETALLENOTAS($codexamen,$codciclo, $codlinea,'$tipo')";
+                          exit(AppController::getDataTable($sql));
+                          break;
+                      case 54:
+ 
+                          $codciclo = $this->request->data['codciclo']; 
+                          $codlinea = $this->request->data['codlinea']; 
+                               
+                          $sql = "CALL SP_DIRECTOR_TUTORES_DSA($codciclo,$codlinea)";
+                           exit(AppController::getDataTable($sql));
+                          break;
 
                   
 

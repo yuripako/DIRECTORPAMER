@@ -4,24 +4,28 @@ https://github.com/yuripako/DIRECTORPAMER.git
 
 ==========CONTROLLER====================
 
-DocenteAcademiaController
+DirectorPamerController.php
 
 ==========JS============================
-
+vistadirector
 
 ==========VIEW==========================
 
-DirectorAcademia/______
+DirectorAcademia/vistadirector
 
-==========RUTA==========================
+==========RUTA PARCIAL==========================
 
-http://localhost/pamervirtual/_____
+http://localhost/pamervirtual/DirectorPamer/vistadirector
 
 ==========NOMBRE DEL MENU================
 
+*Rendimiento académico
+    _Simulacro de admisión
+
+OBS: PERFIL DIRECTOR - CREAR EN EL MENU nueva ruta
 
 ==========STORE PROCEDURE RUTA =============================
 
-SP / SP_EDGAR /
+SP / SP_EDGAR /SP1
 
 
