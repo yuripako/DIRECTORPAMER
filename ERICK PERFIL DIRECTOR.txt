@@ -1,0 +1,27 @@
+========== GIT CLONE ACTUALIZADO ===================
+
+https://github.com/yuripako/DIRECTORPAMER.git
+
+==========CONTROLLER====================
+
+DirectorAcademiaController
+
+==========JS============================
+
+
+==========VIEW==========================
+
+DirectorAcademia/______
+
+==========RUTA==========================
+
+http://localhost/pamervirtual/_____
+
+==========NOMBRE DEL MENU================
+
+
+==========STORE PROCEDURE RUTA =============================
+
+SP / SP_PRADO /
+
+
