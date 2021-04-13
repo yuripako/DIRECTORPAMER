@@ -15,3 +15,6 @@ AND c.codlinea NOT IN (32)
 GROUP BY 1;
 
 END
+
+
+//PRUEBA RULY
