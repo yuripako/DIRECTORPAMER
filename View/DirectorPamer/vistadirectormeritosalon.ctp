@@ -929,7 +929,7 @@
 	<body>
 		<div class="general">
 			<div class="reporte-asistencia">
-				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / RENDIMIENTO ACADÉMICO / REPORTE SIMULACRO / <a class="enlace" href="#" target="_self">MÉRITO POR SALÓN</a></div>
+				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / RENDIMIENTO ACADÉMICO / MÉRITO POR SALÓN / <a class="enlace" href="#" target="_self">SIMULACRO DE ADMISIÓN</a></div>
 				<div class="barra-filtro">
 					<div class="listado-custom" custom="salones-listado"></div>
 					<div class="listado-custom" custom="alumnos-listado"></div>
