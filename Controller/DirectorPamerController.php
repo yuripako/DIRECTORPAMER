@@ -26,6 +26,15 @@ class DirectorPamerController extends AppController {
     }
 
 
+    public function vistadirectormeritosalon() {  //MERITO POR SALON
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectormeritosalon.js?2313"></script>');
+    }
 
 
     // ----------- FIN METODOS DE EDGAR -----------
@@ -103,6 +112,29 @@ class DirectorPamerController extends AppController {
                           break;
 
                   
+                          case 55:
+                            // SLIDER SIMULACRO ENTREGA DE CASE
+                            $codlinea =  $this->request->data['codlinea']; 
+                            $codciclo =  $this->request->data['codciclo']; 
+                            $codsalon =  $this->request->data['codsalon'];                             
+                            $sql = "CALL SP_TUTOR_SLIDER_SIM_SALONEO($codlinea,$codciclo,$codsalon)";
+                            exit(AppController::getDataTable($sql));
+                            break;
+
+                    case 56:
+                        // SLIDER SIMULACRO ENTREGA DE CASE
+                        $codexamen =  $this->request->data['codexamen']; 
+                        $codsalones =  $this->request->data['codsalones']; 
+                        $codlinea =  $this->request->data['codlinea'];   
+                        $codciclo =  $this->request->data['codciclo']; 
+                        $tipo =  $this->request->data['tipo'];    
+                      //  $sql = "CALL SP_TUTORDETALLENOTAS_X_SALON(20464, 20211, 37, 12725, 'TODOS')";
+                        $sql = "CALL SP_TUTORDETALLENOTAS_X_SALON($codexamen,$codciclo,$codlinea,$codsalones,'$tipo')";
+                        exit(AppController::getDataTable($sql));
+                        break;
+
+
+
 
                     // ----------- FIN GET DE EDGAR -----------
 

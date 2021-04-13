@@ -8,19 +8,21 @@ DirectorPamerController.php
 
 ==========JS============================
 vistadirector
-
+vistadirectormeritosalon
 ==========VIEW==========================
 
 DirectorPamer/vistadirector
+DirectorPamer/vistadirectormeritosalon
 
 ==========RUTA PARCIAL==========================
 
 http://localhost/pamervirtual/DirectorPamer/vistadirector
-
+http://localhost/pamervirtual/DirectorPamer/vistadirectormeritosalon
 ==========NOMBRE DEL MENU================
 
 *Rendimiento académico
-    _Simulacro de admisión
+     _Simulacro de admisión general
+     _Simulacro de admisión salón
 
 OBS: PERFIL DIRECTOR - CREAR EN EL MENU nueva ruta
 
