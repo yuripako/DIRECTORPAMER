@@ -9,6 +9,9 @@ FROM tutores a
 INNER JOIN salones b on a.codtutor =b.codtutor
 INNER JOIN ccostos c on c.codccostos= b.codccosto
 WHERE b.codciclo=_codciclo  AND c.codlinea=_codlinea
+
+AND c.codlinea NOT IN (32)
+
 GROUP BY 1;
 
 END
