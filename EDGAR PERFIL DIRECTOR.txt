@@ -11,7 +11,7 @@ vistadirector
 
 ==========VIEW==========================
 
-DirectorAcademia/vistadirector
+DirectorPamer/vistadirector
 
 ==========RUTA PARCIAL==========================
 
