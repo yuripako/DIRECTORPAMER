@@ -9,18 +9,6 @@
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<style type="text/css">
-#cuerpo {
-text-transform: lowercase;
-
-}
-
-
-#cuerpo tr td:first-letter {
-
-text-transform: uppercase;
-
-
-}
 			html, body{
 			padding:0px;
 			margin:0px;
@@ -34,13 +22,6 @@ text-transform: uppercase;
 			color:#04043e;
 			margin-top: 0px;
 			scrollbar-face-color:fuchsia;
-			}
-			.let p:first-letter {
-    text-transform: uppercase;
-}
-
-			.let p:not(first-letter) {
-				text-transform: lowercase;
 			}
 			#meritoalu tr td{
 			text-transform: lowercase;
@@ -953,24 +934,22 @@ text-transform: uppercase;
 	<body>
 		<div class="general">
 			<div class="reporte-asistencia">
-				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / RENDIMIENTO ACADÉMICO / MÉRITO GENERAL / <a class="enlace" href="#" target="_self">SIMULACRO ADMISION</a></div>
+				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / RENDIMIENTO ACADÉMICO / MÉRITO POR SALÓN / <a class="enlace" href="#" target="_self">EVALUACIÓN SEMANAL</a></div>
 				<div class="barra-filtro">
 					<div class="listado-custom" custom="salones-listado"></div>
 					<div class="listado-custom" custom="alumnos-listado"></div>
 					<div class="base1">
 						<div class="fondo1">
 							<div class="centro1">
-								<div class="salon" >
+
+                            <div class="salon" >
 									<div class="arriba">
 										<div class="texto">CICLO</div>
 									</div>
                                     <div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
                                             <select name="" id="loadciclo"  class="form-control" >
-                                                <option>Seleccionar</option>
-                                                <option value="20212">20212</option>
-                                                <option value="20211">20211</option>
-                                                <option value="20203">20203</option>
+                                               
                                               
 											</select>
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
@@ -978,6 +957,8 @@ text-transform: uppercase;
 										</div>
 									</div>
 								</div>
+
+
 
                                 <div class="alumno">
 									<div class="arriba">
@@ -1012,6 +993,7 @@ text-transform: uppercase;
 										</div>
 									</div>
 								</div>
+                           
 
                                 <div class="alumno">
 									<div class="arriba">
@@ -1019,13 +1001,15 @@ text-transform: uppercase;
 									</div>
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-											<select name=""   class="form-control" id="salones" >
+											<select name=""   class="form-control" id="salones" onchange="metodosalon();">
                                                
 											</select>
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
 												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
 										</div>
 									</div>
+                                    <input type="hidden" id="codsaloni" >
+                                    <input type="hidden" id="codlini" >
 								</div>
 
 								<div class="alumno" style="margin-right: 20px;">
@@ -1039,32 +1023,18 @@ text-transform: uppercase;
 												<option value="REGULAR">REGULAR</option>
 												<option value="MEDIA BECA">MEDIA BECA</option>
 												<option value="BECA">BECA</option>
-												<option value="TODOS">TODOS</option>
+                                                <option value="TODOS">TODOS</option>
 											</select>
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
 												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
 										</div>
 									</div>
 								</div>
-								<div class="alumno" style="margin-right: 20px;Display: none;" >
-									<div class="arriba">
-										<div class="texto">
-											ÁREA <!-- <?php echo"<pre>"; print_r($usuario); echo"<pre/>" ?>-->
-										</div>
-									</div>
-									<div class="abajo">
-										<div class="form-group" style="margin-top: 10px;">
-											<select name=""  id="areainfo" class="form-control" onchange="metodoselectarea()">
-												<option id="opcion">Seleccione</option>
-											</select>
-											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
-												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
-										</div>
-									</div>
-								</div>
+
+							
 								<div class="semana">
 									<div class="arriba">
-										<div class="texto">SELECCIONE SIMULACRO</div>
+										<div class="texto">SELECCIONE EVALUACIÓN</div>
 									</div>
 									<div class="abajo">
 										<div class="cuadro">
@@ -1091,11 +1061,30 @@ text-transform: uppercase;
 							<div class="centro1">
 								<div class="titulo">
 									<div class="izquierda">
-										<div class="texto">  Mérito general de Simulacro.</div>
-									  <input type="hidden" id="longi">
+										<div class="texto">Mérito por salón de Evaluaciones</div>
+									</div>
+									<div class="derecha">
+								<div class="asistencia">
+									
+								
+									<div class="opcion">
+										<div class="circulo" opcion="inasistencia" style="background-color: #24d483"></div>
+										<div class="texto">BUENAS</div>
+									</div>
+                                    <div class="opcion">
+										<div class="circulo" opcion="inasistencia" style="background-color: RED;"></div>
+										<div class="texto">MALAS</div>
+									</div>
+                                    <div class="opcion">
+										<div class="circulo" opcion="inasistencia" style="background-color: #ccc;"></div>
+										<div class="texto">EN BlANCO</div>
 									</div>
 								</div>
+							</div>
+								</div>
 								<div class="contenido">
+
+								
 									
 									<div class="row pt-5 mt-5 text-center" id="cuerpoload" style="display:none;">
 										<div class="col-sm-12">
@@ -1109,15 +1098,11 @@ text-transform: uppercase;
 									<div id="tblMerito" class="table-wrapper" style="height:450px; overflow:auto; width: 100%;" >
 										<table class="table table-bordered table-striped table-hover" id="tableprod">
 											<thead>
-												<tr id="cabeza" style="font-weight: bold;">
+												<tr id="cabeza">
 												</tr>
 											</thead>
-											<tbody id="cuerpo" >
+											<tbody id="cuerpo">
 											</tbody>
-											<thead style="background-color: #005afe;">
-												<tr id="pie">
-												</tr>
-											</thead>
 										</table>
 									</div>
 									<!-- FIN DE TABLA-->

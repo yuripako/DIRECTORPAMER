@@ -37,6 +37,17 @@ class DirectorPamerController extends AppController {
     }
 
 
+    public function vistadirectoreva() {  //MERITO POR SALON EVA
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectoreva.js?5"></script>');
+    }
+
+
     // ----------- FIN METODOS DE EDGAR -----------
 
 
@@ -133,7 +144,32 @@ class DirectorPamerController extends AppController {
                         exit(AppController::getDataTable($sql));
                         break;
 
+                        case 57:
+                            $codsalon =  $this->request->data['codsalon'];                                                                     
+                            $sql = "CALL SP_TUTOR_SLIDER_EVA_SALON($codsalon)";
+                            exit(AppController::getDataTable($sql));  
+                        break;
 
+
+                        case 58:
+                            $codexamen =  $this->request->data['codexamen'];                             
+                            $sql = "CALL SP_TUTORHEAD($codexamen)";
+                            exit(AppController::getDataTable($sql));
+                        break;
+
+                        case 59:
+                            $codsalon =  $this->request->data['codsalon'];   
+                            $tipo = $this->request->data['tipo'];  
+                            $codexamen =  $this->request->data['codexamen'];                    
+                            $sql = "CALL SP_TUTORDETALLENOTAS_SALON($codexamen,'$tipo',$codsalon )";
+                            exit(AppController::getDataTable($sql));  
+                        break;
+
+                        case 60:
+                                             
+                            $sql = "CALL SP_DIRECTOR_CICLO( )";
+                            exit(AppController::getDataTable($sql));  
+                        break;
 
 
                     // ----------- FIN GET DE EDGAR -----------

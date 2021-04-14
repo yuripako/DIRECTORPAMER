@@ -6,25 +6,32 @@ https://github.com/yuripako/DIRECTORPAMER.git
 
 DirectorPamerController.php
 
+OBS: SIEMPRE CHANTA EL CONTROLADOR
 ==========JS============================
-vistadirector
-vistadirectormeritosalon
+
+vistadirectoreva
+
+OBS:Sube los js donde siempre aquí esta estructurado
+par que esté ordenado
 ==========VIEW==========================
 
-DirectorPamer/vistadirector
-DirectorPamer/vistadirectormeritosalon
+DirectorPamer/vistadirectoreva
+
+OBS:Sube los ctp a DirectorPamer  aquí esta estructurado 
+para cada desarrollador asi esté más ordenado
 
 ==========RUTA PARCIAL==========================
 
-http://localhost/pamervirtual/DirectorPamer/vistadirector
-http://localhost/pamervirtual/DirectorPamer/vistadirectormeritosalon
+http://localhost/pamervirtual/DirectorPamer/vistadirectoreva
+
 ==========NOMBRE DEL MENU================
 
 *Rendimiento académico
-     _Simulacro de admisión general
-     _Simulacro de admisión salón
+     _	EVALUACIONES EVA SEMANAL
+ 
 
-OBS: PERFIL DIRECTOR - CREAR EN EL MENU nueva ruta
+OBS: PERFIL DIRECTOR - EDUARDO CREO EL MENU PARA ESTE MODULO
+DirectorPamer/vistadirectoreva ASI
 
 ==========STORE PROCEDURE RUTA =============================
 

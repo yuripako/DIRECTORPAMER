@@ -4,24 +4,35 @@ https://github.com/yuripako/DIRECTORPAMER.git
 
 ==========CONTROLLER====================
 
-DirectorAcademiaController
+DirectorPamerController.php
 
+OBS: SIEMPRE CHANTA EL CONTROLADOR
 ==========JS============================
 
 
+
+OBS:
 ==========VIEW==========================
 
-DirectorAcademia/______
+DirectorPamer/
 
-==========RUTA==========================
+OBS:
 
-http://localhost/pamervirtual/_____
+==========RUTA PARCIAL==========================
+
+http://localhost/pamervirtual/DirectorPamer/
 
 ==========NOMBRE DEL MENU================
 
+*
+     _	
+ 
+OBS: 
 
 ==========STORE PROCEDURE RUTA =============================
 
-SP / SP_HUARACHA /
+SP / 
+
+
 
 
