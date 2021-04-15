@@ -6,7 +6,25 @@ class DirectorPamerController extends AppController {
     public $uses = array('Usuario');
 
     // ----------- METODOS DE ERICK PRADO -----------
- 
+    public function controltareas() {
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/controltareas.js?212"></script>');
+    }
+
+    public function controltareas_tutorsalon() {
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/controltareas_tutorsalon.js?212"></script>');
+    }
 
 
 
@@ -78,7 +96,20 @@ class DirectorPamerController extends AppController {
                 switch ($op)
                 {
                     // ----------- GET DE ERICK PRADO 1-50 -----------
-                  
+                    case 1: //7 nuevo
+                        $ciclo = $this->request->data['ciclo'];
+                        $linea = $this->request->data['linea'];
+                        $sql = "CALL SP_DIRECTOR_SEMANA_TAREA($ciclo,$linea)";
+                        exit(AppController::getDataTable($sql));  
+                    break;
+
+                    case 2: //7 nuevo
+                        $ciclo = $this->request->data['ciclo'];
+                        $linea = $this->request->data['linea'];
+                        $semana = $this->request->data['semana'];
+                        $sql = "CALL SP_DIRECTOR_SEMANA_TAREA_DET($ciclo,$linea,$semana)";
+                        exit(AppController::getDataTable($sql));  
+                    break;
 
 
                     // ----------- FIN GET DE ERICK PRADO -----------
