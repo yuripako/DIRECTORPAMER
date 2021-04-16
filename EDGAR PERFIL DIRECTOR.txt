@@ -9,32 +9,28 @@ DirectorPamerController.php
 OBS: SIEMPRE CHANTA EL CONTROLADOR
 ==========JS============================
 
-vistadirectoreva
+vistadirectoracademico.js
 
-OBS:Sube los js donde siempre aquí esta estructurado
-par que esté ordenado
+
 ==========VIEW==========================
 
-DirectorPamer/vistadirectoreva
+DirectorPamer/vistadirectoracademico.ctp
 
-OBS:Sube los ctp a DirectorPamer  aquí esta estructurado 
-para cada desarrollador asi esté más ordenado
 
 ==========RUTA PARCIAL==========================
 
-http://localhost/pamervirtual/DirectorPamer/vistadirectoreva
+http://localhost/pamervirtual/DirectorPamer/vistadirectoracademico
 
 ==========NOMBRE DEL MENU================
 
 *Rendimiento académico
-     _	EVALUACIONES EVA SEMANAL
+     _	RENDIMIENTO POR SALONES
  
 
-OBS: PERFIL DIRECTOR - EDUARDO CREO EL MENU PARA ESTE MODULO
-DirectorPamer/vistadirectoreva ASI
+OBS: PERFIL DIRECTOR 
 
 ==========STORE PROCEDURE RUTA =============================
 
-SP / SP_EDGAR /SP1
+SP / SP_EDGAR /
 
 
