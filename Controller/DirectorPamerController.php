@@ -65,6 +65,17 @@ class DirectorPamerController extends AppController {
         $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectoreva.js?5"></script>');
     }
 
+    public function vistadirectoracademico() {  //RENDIMIENTO POR SALONES
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectoracademico.js?11"></script>');
+    }
+
+
 
     // ----------- FIN METODOS DE EDGAR -----------
 
