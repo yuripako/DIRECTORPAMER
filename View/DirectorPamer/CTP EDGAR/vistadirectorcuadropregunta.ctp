@@ -45,7 +45,7 @@
 			border:0px !important;
 			}
 			table, th, td {
-			border: 1px solid #fff;
+			border: 1px solid #ccc;
 			}
 			/* width */
 			::-webkit-scrollbar {
@@ -150,7 +150,7 @@
 			.table-wrapper thead th { position: sticky; top: 0; }
 			/* Just common table stuff. Really. */
 			table  { border-collapse: collapse; width: 100%; }
-		
+			th, td { padding: 8px 16px; }
 			th     { background:#fff; }     
 			/* FINALIZO */
 			.general textarea, 
@@ -717,7 +717,12 @@
 					opacity: 0;
 				}
 			}
-		
+			#tableprod td, #tableprod th {
+				text-align: center;
+			}
+			table#tableprod td:first-child, table#tableprod th:first-child {
+				text-align: left;
+			}
 			/******************************************************************************************************************************/
 		</style>
 		<script type="text/javascript">
@@ -929,16 +934,16 @@
 	<body>
 		<div class="general">
 			<div class="reporte-asistencia">
-				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / RENDIMIENTO ACADÉMICO / <a class="enlace" href="#" target="_self">RENDIMIENTO POR SALONES</a></div>
+				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / RENDIMIENTO ACADÉMICO / <a class="enlace" href="#" target="_self">CUADRO ESTADÍSTICO DE PREGUNTAS</a></div>
 				<div class="barra-filtro">
 					<div class="listado-custom" custom="salones-listado"></div>
 					<div class="listado-custom" custom="alumnos-listado"></div>
 					<div class="base1">
 						<div class="fondo1">
 							<div class="centro1">
-
-
-								<div class="salon" >
+                            
+							
+                            <div class="salon" >
 									<div class="arriba">
 										<div class="texto">CICLO</div>
 									</div>
@@ -952,7 +957,7 @@
 										</div>
 									</div>
 								</div>
-
+                           
                                 <div class="alumno">
 									<div class="arriba">
 										<div class="texto">LÍNEA</div>
@@ -971,8 +976,6 @@
 										</div>
 									</div>
 								</div>
-
-							
 
                                 <div class="alumno">
 									<div class="arriba">
@@ -1006,8 +1009,8 @@
                                     <input type="hidden" id="codlini" >
 								</div>
 
-							
 
+							
 								<div class="alumno" style="margin-right: 20px;">
 									<div class="arriba">
 										<div class="texto">TIPO DE ALUMNO</div>
@@ -1026,31 +1029,15 @@
 										</div>
 									</div>
 								</div>
-								<div class="alumno" style="margin-right: 20px;">
+
+
+								<div class="alumno" style="margin-right: 20px;display: none;">
 									<div class="arriba">
 										<div class="texto">
-											DETALLE. <!-- <?php echo"<pre>"; print_r($usuario); echo"<pre/>" ?>-->
+											ÁREA <!-- <?php echo"<pre>"; print_r($usuario); echo"<pre/>" ?>-->
 										</div>
 									</div>
-
-
 									<div class="abajo">
-										<div class="form-group" style="margin-top: 10px;">
-										<div class="texto">
-											<span id="detallesim"></span>
-										</div>
-
-										</div>
-
-
-									</div>
-
-
-
-
-
-
-									<div class="abajo" style="display: none;">
 										<div class="form-group" style="margin-top: 10px;">
 											<select name=""  id="areainfo" class="form-control" onchange="metodoselectarea()">
 												<option id="opcion">Seleccione</option>
@@ -1058,13 +1045,11 @@
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
 												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
 										</div>
-
-
 									</div>
 								</div>
 								<div class="semana">
 									<div class="arriba">
-										<div class="texto">SELECCIONE SIMULACRO</div>
+										<div class="texto">SELECCIONE EVALUACIÓN</div>
 									</div>
 									<div class="abajo">
 										<div class="cuadro">
@@ -1091,7 +1076,7 @@
 							<div class="centro1">
 								<div class="titulo">
 									<div class="izquierda">
-										<div class="texto">Rendimiento por salones.</div>
+										<div class="texto">Cuadro estadístico de evaluaciones</div>
 									</div>
 									<div class="derecha">
 								<div class="asistencia">
@@ -1099,13 +1084,13 @@
 								
 									<div class="opcion">
 										<div class="circulo" opcion="inasistencia" style="background-color: #24d483"></div>
-										<div class="texto">BUENAS</div>
+										<div class="texto">CORRECTA</div>
 									</div>
                                     <div class="opcion">
-										<div class="circulo" opcion="inasistencia" style="background-color: RED;"></div>
-										<div class="texto">MALAS</div>
+										<div class="circulo" opcion="inasistencia" style="background-color: #005cfe;"></div>
+										<div class="texto">MÁS VECES SELECCIONADA</div>
 									</div>
-                                    <div class="opcion">
+                                    <div class="opcion" style="display: none;">
 										<div class="circulo" opcion="inasistencia" style="background-color: #ccc;"></div>
 										<div class="texto">EN BlANCO</div>
 									</div>
@@ -1128,13 +1113,17 @@
 									<div id="tblMerito" class="table-wrapper" style="height:450px; overflow:auto; width: 100%;" >
 										<table class="table table-bordered table-striped table-hover" id="tableprod">
 											<thead>
-											    <tr >
-													<th colspan="11" style="background-color: aliceblue;" id="detallesim2"> 
-
-											    	</th>
-												
-												</tr>
 												<tr id="cabeza">
+												<th></th>
+												<th></th>
+												   <th>PREGUNTA</th>
+												   <th>CURSO</th>
+												   <th>A</th>
+												   <th>B</th>
+												   <th>C</th>
+												   <th>D</th>
+												   <th>E</th>
+												   <th>EN BLANCO</th>
 												</tr>
 											</thead>
 											<tbody id="cuerpo">

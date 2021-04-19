@@ -9,22 +9,22 @@ DirectorPamerController.php
 OBS: SIEMPRE CHANTA EL CONTROLADOR
 ==========JS============================
 
-vistadirectoracademico.js
+vistadirectorcuadropregunta.js
 
 
 ==========VIEW==========================
 
-DirectorPamer/vistadirectoracademico.ctp
+DirectorPamer/vistadirectorcuadropregunta.ctp
 
 
 ==========RUTA PARCIAL==========================
 
-http://localhost/pamervirtual/DirectorPamer/vistadirectoracademico
+http://localhost/pamervirtual/DirectorPamer/vistadirectorcuadropregunta
 
 ==========NOMBRE DEL MENU================
 
 *Rendimiento académico
-     _	RENDIMIENTO POR SALONES
+     _	por alumno
  
 
 OBS: PERFIL DIRECTOR 

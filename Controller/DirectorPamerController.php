@@ -75,7 +75,15 @@ class DirectorPamerController extends AppController {
         $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectoracademico.js?11"></script>');
     }
 
-
+    public function vistadirectorcuadropregunta() {  //CUADRO ESTADISTICA DE PREGUNTA
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectorcuadropregunta.js?12"></script>');
+    }
 
     // ----------- FIN METODOS DE EDGAR -----------
 
@@ -221,6 +229,21 @@ class DirectorPamerController extends AppController {
                             $sql = "CALL SP_DIRECTOR_CICLO( )";
                             exit(AppController::getDataTable($sql));  
                         break;
+
+                        case 61:
+                            $codsalon =  $this->request->data['codsalon'];                                                                     
+                            $sql = "CALL SP_TUTOR_SLIDER_EVA_SALON($codsalon)";
+                            exit(AppController::getDataTable($sql));  
+                        break;
+
+                        case 62:                          
+                            $codsalon =  $this->request->data['codsalon'];   
+                            $codexamen =  $this->request->data['codexamen'];  
+                            $tipo =  $this->request->data['tipo'];                  
+                            $sql = "CALL NPV_TUTOR_EVA_EVAFILTRO_COD($codexamen,$codsalon,'$tipo');";
+                            exit(AppController::getDataTable($sql));  
+                        break;
+
 
 
                     // ----------- FIN GET DE EDGAR -----------
