@@ -122,6 +122,15 @@ class DirectorPamerController extends AppController {
                         exit(AppController::getDataTable($sql));  
                     break;
 
+                    case 3: //7 nuevo
+                        $ciclo = $this->request->data['ciclo'];
+                        $linea = $this->request->data['linea'];
+                        $semana = $this->request->data['semana'];
+                        $salon = $this->request->data['salon'];
+                        $sql = "CALL SP_DIRECTOR_SEMANA_TAREA_DET_TUTORSALON($ciclo,$linea,$semana,$salon)";
+                        exit(AppController::getDataTable($sql));  
+                    break;
+
 
                     // ----------- FIN GET DE ERICK PRADO -----------
 

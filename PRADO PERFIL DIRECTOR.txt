@@ -9,31 +9,30 @@ DirectorPamerController.php
 OBS: SIEMPRE CHANTA EL CONTROLADOR
 ==========JS============================
 
-controltareas.js
+controltareas_tutorsalon.js
 
 OBS:
 ==========VIEW==========================
 
-DirectorPamer/controltareas
+DirectorPamer/controltareas_tutorsalon
 
 OBS:
 
 ==========RUTA PARCIAL==========================
 
-http://localhost/pamervirtual/DirectorPamer/controltareas
+http://localhost/pamervirtual/DirectorPamer/controltareas_tutorsalon
 
 ==========NOMBRE DEL MENU================
 
 *CONTROL DE TAREAS
-     _	POR LINEA
+     _	POR TUTOR Y SALÓN
  
 OBS: PERFIL DIRECTOR - SE DEBE CREAR EL MENU PARA ESTE MODULO
 DirectorPamer/vistadirectoreva ASI
 
 ==========STORE PROCEDURE RUTA =============================
 
-SP / SP_PRADO / SP_DIRECTOR_SEMANA_TAREA.txt
-SP / SP_PRADO / SP_DIRECTOR_SEMANA_TAREA_DET.txt
+SP / SP_PRADO / SP_DIRECTOR_SEMANA_TAREA_DET_TUTORSALON.txt
 
 
 
