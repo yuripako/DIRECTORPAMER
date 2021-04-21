@@ -85,6 +85,23 @@ class DirectorPamerController extends AppController {
         $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectorcuadropregunta.js?12"></script>');
     }
 
+    public function vistadirectorasistencia() {  //CONTROL DE ASISTENCIA
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectorasistencia.js?121"></script>');
+        $this->set('objJS', '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />');
+        $this->set('objJS', '<script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>');
+        $this->set('objJS', '<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>');
+        $this->set('objJS', '<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>');
+    }
+
+
+
+
     // ----------- FIN METODOS DE EDGAR -----------
 
 
@@ -243,7 +260,15 @@ class DirectorPamerController extends AppController {
                             $sql = "CALL NPV_TUTOR_EVA_EVAFILTRO_COD($codexamen,$codsalon,'$tipo');";
                             exit(AppController::getDataTable($sql));  
                         break;
+                        
+                        case 63:                          
+                            $codciclo =  $this->request->data['codciclo']; 
+                            $codlinea =  $this->request->data['codlinea']; 
+                            $fechacalendar =  $this->request->data['fechacalendar']; 
 
+                            $sql = "CALL SP_DIRECTOR_ASISxxxSALONES($codciclo,$codlinea,'$fechacalendar');";
+                            exit(AppController::getDataTable($sql));  
+                        break;
 
 
                     // ----------- FIN GET DE EDGAR -----------

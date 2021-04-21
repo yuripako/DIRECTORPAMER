@@ -8,6 +8,15 @@
 		<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+        <!--CALENDAR -->
+
+		<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+
 		<style type="text/css">
 			html, body{
 			padding:0px;
@@ -29,10 +38,10 @@
 			#meritoalu tr td:first-letter {
 			text-transform: uppercase;
 			}
-			#data tr td {
+			#cuerpo tr td {
 			text-transform: lowercase;
 			}
-			#data tr td:first-letter {
+			#cuerpo tr td:first-letter {
 			text-transform: uppercase;
 			} 
 			.table {
@@ -934,7 +943,7 @@
 	<body>
 		<div class="general">
 			<div class="reporte-asistencia">
-				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / RENDIMIENTO ACADÉMICO / <a class="enlace" href="#" target="_self">CUADRO ESTADÍSTICO DE PREGUNTAS</a></div>
+				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES /  <a class="enlace" href="#" target="_self">ASISTENCIA DE ALUMNOS</a></div>
 				<div class="barra-filtro">
 					<div class="listado-custom" custom="salones-listado"></div>
 					<div class="listado-custom" custom="alumnos-listado"></div>
@@ -964,7 +973,7 @@
 									</div>
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-											<select name="lineal" id="lineal"  class="form-control" onchange="loadtutores();">
+											<select name="lineal" id="lineal"  class="form-control" >
                                                 <option>Seleccionar</option>
                                                 <option value="1">Católica Talento</option>
                                                 <option value="31">Virtual San Marcos</option>
@@ -977,93 +986,36 @@
 									</div>
 								</div>
 
-                                <div class="alumno">
+								<div class="alumno">
 									<div class="arriba">
-										<div class="texto">TUTOR</div>
+										<div class="texto">FECHA</div>
 									</div>
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-											<select name=""   class="form-control" id="tutores" onchange="loadsalones();" >
-                                                
-											</select>
-											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
-												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
+											
+										<input type="text" id="datepicker" class="form-control" style="font-size: 16px;">
+											<i class="glyphicon glyphicon-calendar" style="    background-color: #005afe;color: #fff;padding: 5px;
+												border-radius: 1em;font-size: 15px; margin-top: 6px;"></i>
 										</div>
 									</div>
 								</div>
 
-                                <div class="alumno">
+								<div class="alumno">
 									<div class="arriba">
-										<div class="texto">SALÓN</div>
+										<div class="texto">CONSULTAR</div>
 									</div>
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-											<select name=""   class="form-control" id="salones" onchange="metodosalon();">
-                                               
-											</select>
-											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
-												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
-										</div>
-									</div>
-                                    <input type="hidden" id="codsaloni" >
-                                    <input type="hidden" id="codlini" >
-								</div>
+											
+										
+										<button onclick="centinela();" type="button" style="  color: #fff;  background-color: #005cfe;" class="btn btn-default" aria-label="Left Align">
+											<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> CONSULTAR
+											</button>
 
-
-							
-								<div class="alumno" style="margin-right: 20px;">
-									<div class="arriba">
-										<div class="texto">TIPO DE ALUMNO</div>
-									</div>
-									<div class="abajo">
-										<div class="form-group" style="margin-top: 10px;">
-											<select name=""  id="tipo" class="form-control" onchange="metodotipo();">
-												<option value="msj">Selleccione</option>
-												<option value="REGULAR">REGULAR</option>
-												<option value="MEDIA BECA">MEDIA BECA</option>
-												<option value="BECA">BECA</option>
-                                                <option value="TODOS">TODOS</option>
-											</select>
-											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
-												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
 										</div>
 									</div>
 								</div>
 
-
-								<div class="alumno" style="margin-right: 20px;display: none;">
-									<div class="arriba">
-										<div class="texto">
-											ÁREA <!-- <?php echo"<pre>"; print_r($usuario); echo"<pre/>" ?>-->
-										</div>
-									</div>
-									<div class="abajo">
-										<div class="form-group" style="margin-top: 10px;">
-											<select name=""  id="areainfo" class="form-control" onchange="metodoselectarea()">
-												<option id="opcion">Seleccione</option>
-											</select>
-											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
-												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
-										</div>
-									</div>
-								</div>
-								<div class="semana">
-									<div class="arriba">
-										<div class="texto">SELECCIONE EVALUACIÓN</div>
-									</div>
-									<div class="abajo">
-										<div class="cuadro">
-											<div class="izquierda desactivado">
-												<img src="../img/tutorimg/izquierda.png" />
-											</div>
-											<div class="centro" id="simu">
-											</div>
-											<div class="derecha activado">
-												<img src="../img/tutorimg/derecha.png" />
-											</div>
-										</div>
-									</div>
-								</div>
 								<div class="extra">
 								</div>
 							</div>
@@ -1076,24 +1028,13 @@
 							<div class="centro1">
 								<div class="titulo">
 									<div class="izquierda">
-										<div class="texto">Cuadro estadístico de evaluaciones</div>
+										<div class="texto">Asitencia de alumnos.</div>
 									</div>
 									<div class="derecha">
 								<div class="asistencia">
 									
 								
-									<div class="opcion">
-										<div class="circulo" opcion="inasistencia" style="background-color: #24d483"></div>
-										<div class="texto">CORRECTA</div>
-									</div>
-                                    <div class="opcion">
-										<div class="circulo" opcion="inasistencia" style="background-color: #005cfe;"></div>
-										<div class="texto">MÁS VECES SELECCIONADA</div>
-									</div>
-                                    <div class="opcion" style="display: none;">
-										<div class="circulo" opcion="inasistencia" style="background-color: #ccc;"></div>
-										<div class="texto">EN BlANCO</div>
-									</div>
+								
 								</div>
 							</div>
 								</div>
@@ -1110,23 +1051,13 @@
 										</div>
 									</div>
 									<!-- INICIO TABLA-->
-									<div id="tblMerito" class="table-wrapper" style="height:450px; overflow:auto; width: 100%;" >
+									<div id="tblMerito" class="table-wrapper" style="height:400px; overflow:auto; width: 100%;" >
 										<table class="table table-bordered table-striped table-hover" id="tableprod">
 											<thead>
-												<tr id="cabeza">
-												<th></th>
-												<th></th>
-												   <th>PREGUNTA</th>
-												   <th>CURSO</th>
-												   <th>A</th>
-												   <th>B</th>
-												   <th>C</th>
-												   <th>D</th>
-												   <th>E</th>
-												   <th>EN BLANCO</th>
-												</tr>
+                                              <tr id="cabeza" style="    text-transform: uppercase;"></tr>
+												
 											</thead>
-											<tbody id="cuerpo">
+											<tbody id="cuerpo" style="color:#444">
 											</tbody>
 										</table>
 									</div>
@@ -1184,3 +1115,4 @@
 	}
 	
 </script>
+
