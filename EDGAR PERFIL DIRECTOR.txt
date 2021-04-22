@@ -10,26 +10,28 @@ OBS: SIEMPRE CHANTA EL CONTROLADOR
 ==========JS============================
 
 vistadirectorasistencia.js
+vistaseleccionado.js
 
 ==========VIEW==========================
 
 DirectorPamer/vistadirectorasistencia.ctp
-
+DirectorPamer/vistaseleccionado.ctp
 
 ==========RUTA PARCIAL==========================
 
 http://localhost/pamervirtual/DirectorPamer/vistadirectorasistencia
+http://localhost/pamervirtual/Directorpamer/vistaseleccionado
 
 ==========NOMBRE DEL MENU================
 
 *Rendimiento académico
      _	Asistencia de alumnos
- 
+     _ Alumnos seleccionados
 
 OBS: PERFIL DIRECTOR 
 
 ==========STORE PROCEDURE RUTA =============================
 
 SP / SP_EDGAR /SP1
-
+SP / SP_EDGAR /SP2
 

@@ -1,0 +1,38 @@
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_DIRECTOR_ALUMNOSxxxSELECCIONADOS`(
+_codciclo INT,
+_codlinea INT,
+_meses VARCHAR(33)
+)
+BEGIN
+
+SET lc_time_names = 'es_ES';
+SELECT * FROM(
+SELECT
+tbl2.mes mes, tbl1.codciclo,tbl1.nomlinea,tbl1.nomsalones,tbl1.datos,tbl1.cantidad,
+tbl2.seleccionado
+FROM
+(
+SELECT
+b.codciclo,d.codlinea,d.nomlinea,b.codsalones, b.nomsalones, 
+CONCAT(a.apellidos," ",a.nombres) datos,
+COUNT(DISTINCT alu.codalumno) cantidad
+FROM tutores a
+INNER  JOIN salones b on a.codtutor =b.codtutor
+INNER JOIN ccostos c on c.codccostos= b.codccosto
+INNER JOIN lineas d on d.codlinea=c.codlinea
+INNER JOIN alumnos alu on alu.codsalon=b.codsalones
+WHERE alu.codciclo=_codciclo  AND c.codlinea=_codlinea
+GROUP BY b.codsalones
+)tbl1
+INNER JOIN
+(
+SELECT b.codsalon ,MONTHNAME(fecha_registro) mes, COUNT(a.codalumno) seleccionado
+FROM distancia_alumnosseleccionados a
+INNER JOIN alumnos b on a.codalumno  = b.codalumno
+WHERE a.swseleccionado=1 AND b.codciclo=_codciclo
+GROUP BY 1,2
+)tbl2 on  tbl2.codsalon = tbl1.codsalones
+
+
+)tableta WHERE mes=_meses;
+END

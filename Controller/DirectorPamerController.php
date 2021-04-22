@@ -100,6 +100,20 @@ class DirectorPamerController extends AppController {
     }
 
 
+    public function vistaseleccionado() {  // ALUMNOS SELECCIONADOS
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistaseleccionado.js?14"></script>');
+        $this->set('objJS', '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />');
+        $this->set('objJS', '<script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>');
+        $this->set('objJS', '<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>');
+        $this->set('objJS', '<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>');
+        $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
+    }
 
 
     // ----------- FIN METODOS DE EDGAR -----------
@@ -270,7 +284,14 @@ class DirectorPamerController extends AppController {
                             exit(AppController::getDataTable($sql));  
                         break;
 
-
+                        case 64:                          
+                            $codciclo =  $this->request->data['codciclo']; 
+                            $codlinea =  $this->request->data['codlinea']; 
+                            $meses =  $this->request->data['meses']; 
+                            $sql = " CALL  SP_DIRECTOR_ALUMNOSxxxSELECCIONADOS($codciclo,$codlinea,'$meses'); ";
+                            exit(AppController::getDataTable($sql));  
+                        break;
+                        
                     // ----------- FIN GET DE EDGAR -----------
 
 
