@@ -296,6 +296,45 @@ class DirectorPamerController extends AppController {
 
 
                     // ----------- GET DE ERICK HUARACHA 101- 150 -----------
+                    case 101:
+                        $prejson = $this->request->data('objJSON');
+                         $json = AppController::JSONisValid($prejson);
+                         $sql = "CALL SP_DIRECTOR_CICLO()";
+                         exit(AppController::getDataTable($sql));
+                     break;
+                    case 103:
+                        $codlinea =  $this->request->data['codlinea'];   
+                        $codciclo =  $this->request->data['codciclo']; 
+                        $sql = "CALL SP_DIRECTOR_LISTA_MOROSIDAD(".$codciclo.",".$codlinea.")";
+                        AppController::getDataTable($sql);
+                        break;
+                    case 104:
+                        $codlinea =  $this->request->data['codlinea'];   
+                        $codciclo =  $this->request->data['codciclo']; 
+                        $sql = "CALL SP_DIRECTOR_CONVER_PROMEDIO(".$codciclo.",".$codlinea.")";
+                        AppController::getDataTable($sql);
+                        break;
+                    case 105:
+                        $codsalon =  $this->request->data['codsalon']; 
+                        $tipo =  $this->request->data['tipo']; 
+                        $sql = "CALL SP_DIRECTOR_FRECUENCIA(".$codsalon.",'".$tipo."')";
+                        AppController::getDataTable($sql);
+                        break;
+                    case 106:
+                        $sql = "CALL SP_TIPO_ALUMNO()";
+                        AppController::getDataTable($sql);
+                        break;
+                    case 107:
+                        $codsalon =  $this->request->data['codsalon']; 
+                        $tipo =  $this->request->data['tipo']; 
+                        $sql = "CALL SP_DIRECTOR_ACUERDO_LISTA(".$codsalon.",'".$tipo."')";
+                        AppController::getDataTable($sql);
+                        break;
+                    case 108:
+                        $codacuerdo =  $this->request->data['codacuerdo'];
+                        $sql = "CALL SP_DIRECTOR_ACUERDO_DETALLE(".$codacuerdo.")";
+                        AppController::getDataTable($sql);
+                        break;
                     // ----------- FIN GET DE ERICK HUARACHA -----------
                     
                 }
