@@ -1,0 +1,37 @@
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `pamervirtual`.`SP_DIRECTOR_LISTA_MOROSIDAD`(
+intCiclo int,
+intLinea int
+)
+BEGIN
+	declare myJson  	text;
+
+	set session group_concat_max_len = 10000000000;
+	set  @myJson = '' ;
+
+	select s.codciclo,l.nomlinea,s.nomsalones,count(tb.codalumno),sum(tb.estado = 'P'),sum(p1 = 1),sum(p2 = 1),sum(p3 = 1),l.codlinea 
+	from (
+			select
+				if(c.pago>0,3,IF(TIMESTAMPDIFF(DAY,MAX(c.feccuota),now())<4 and TIMESTAMPDIFF(DAY,MAX(c.feccuota),now())>= 1 ,1,0)) as p1,
+				if(c.pago>0,3,IF(TIMESTAMPDIFF(DAY,MAX(c.feccuota),now())<7 and TIMESTAMPDIFF(DAY,MAX(c.feccuota),now())>= 4 ,1,0)) as p2,
+				if(c.pago>0,0,IF(TIMESTAMPDIFF(DAY,MAX(c.feccuota),now())>7,1,0)) as p3,
+				a.codsalon,
+				c.codalumno,
+				if(c.pago>0,'P','V') as estado,
+				MAX(c.feccuota) as fecha
+			FROM alumnos a 
+			left join datos_basicos db on a.codalumno=db.codfox
+			left join ccostos cc on cc.codccostos = a.codccosto 
+			left join comprom c on db.codfox = c.codalumno 
+			where c.codciclo = intCiclo and db.swactivo = 1 and c.feccuota < now()
+			and a.swretirado	= 0
+			and a.swanulado	= 0
+			GROUP BY c.codalumno
+			ORDER BY codalumno ,fecha desc
+	) as tb
+	left join salones s  on tb.codsalon = s.codsalones 
+	left join ccostos c on c.codccostos = s.codccosto 
+	left join lineas l on c.codlinea = l.codlinea 
+	where s.codciclo = intCiclo and c.codlinea = intLinea
+	group by s.codsalones;
+
+END

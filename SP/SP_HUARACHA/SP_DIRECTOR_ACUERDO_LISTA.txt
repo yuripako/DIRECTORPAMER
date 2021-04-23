@@ -1,0 +1,67 @@
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `pamervirtual`.`SP_DIRECTOR_ACUERDO_LISTA`(
+	intSalon int,
+	intTipo int
+)
+BEGIN
+	SET lc_time_names = 'es_ES';
+	set session group_concat_max_len=1000000;
+   	SELECT 
+	a.codalumno,
+	concat(
+	SEG_NEGOCIOS_DES(db.apellidopa, 'f3bd7fd075e3d803d9c4b4db36816dec', '260139e4406a35bf618ac17f0cdf34cf') ," ", 
+		SEG_NEGOCIOS_DES(db.apellidoma, 'f3bd7fd075e3d803d9c4b4db36816dec', '260139e4406a35bf618ac17f0cdf34cf') , " " ,
+		SEG_NEGOCIOS_DES(db.nombre, 'f3bd7fd075e3d803d9c4b4db36816dec', '260139e4406a35bf618ac17f0cdf34cf') , " ",
+		SEG_NEGOCIOS_DES(db.nombre2, 'f3bd7fd075e3d803d9c4b4db36816dec', '260139e4406a35bf618ac17f0cdf34cf') 
+	) as nombres_apellidos,
+	if(das.swseleccionado=1,'SI','NO') as seleccionado,
+	if(ac1.creado is NULL,'N',DATE_FORMAT(ac1.creado,'%d %b. %Y')) as ac_creado_1,
+	if(ac2.creado is NULL,'N',DATE_FORMAT(ac2.creado,'%d %b. %Y')) as ac_creado_2,
+	if(ac3.creado is NULL,'N',DATE_FORMAT(ac3.creado,'%d %b. %Y')) as ac_creado_3,
+	if(ac4.creado is NULL,'N',DATE_FORMAT(ac4.creado,'%d %b. %Y')) as ac_creado_4,
+	if(ac5.creado is NULL,'N',DATE_FORMAT(ac5.creado,'%d %b. %Y')) as ac_creado_5,
+	if(ac6.creado is NULL,'N',DATE_FORMAT(ac6.creado,'%d %b. %Y')) as ac_creado_6,
+	if(ac7.creado is NULL,'N',DATE_FORMAT(ac7.creado,'%d %b. %Y')) as ac_creado_7,
+	if(ac8.creado is NULL,'N',DATE_FORMAT(ac8.creado,'%d %b. %Y')) as ac_creado_8,
+	if(ac9.creado is NULL,'N',DATE_FORMAT(ac9.creado,'%d %b. %Y')) as ac_creado_9,
+	if(ac10.creado is NULL,'N',DATE_FORMAT(ac10.creado,'%d %b. %Y')) as ac_creado_10,
+	ac1.acuerdo_id as ac_1,
+	ac2.acuerdo_id as ac_2,
+	ac3.acuerdo_id as ac_3,
+	ac4.acuerdo_id as ac_4,
+	ac5.acuerdo_id as ac_5,
+	ac6.acuerdo_id as ac_6,
+	ac7.acuerdo_id as ac_7,
+	ac8.acuerdo_id as ac_8,
+	ac9.acuerdo_id as ac_9,
+	ac10.acuerdo_id as ac_10,
+	sa.codsalones
+	FROM datos_basicos db 
+	left join usuarios us on us.id = db.id
+	left join alumnos a on db.codfox=a.codalumno
+	left join ccostos cc  on a.codccosto=cc.codccostos
+	left join locales lo on cc.codlocal=lo.codlocales
+	left join lineas li on cc.codlinea=li.codlinea
+	left join salones sa on a.codsalon=sa.codsalones
+	left join ubigeo ubi on lo.codubigeo = ubi.codubigeo
+	left join distancia_alumnosseleccionados das on das.codalumno = a.codalumno
+	left join alumnos_informes aluinfo on aluinfo.codinforme = a.codinforme
+	left join acuerdos_orientacion ac1 on ac1.alumno_cod = a.codalumno and ac1.acuerdo_num = 1 and ac1.salon =intSalon and ac1.acuerdo_relacion = intTipo
+	left join acuerdos_orientacion ac2 on ac2.alumno_cod = a.codalumno and ac2.acuerdo_num = 2 and ac2.salon =intSalon and ac2.acuerdo_relacion = intTipo
+	left join acuerdos_orientacion ac3 on ac3.alumno_cod = a.codalumno and ac3.acuerdo_num = 3 and ac3.salon =intSalon and ac3.acuerdo_relacion = intTipo
+	left join acuerdos_orientacion ac4 on ac4.alumno_cod = a.codalumno and ac4.acuerdo_num = 4 and ac4.salon =intSalon and ac4.acuerdo_relacion = intTipo
+	left join acuerdos_orientacion ac5 on ac5.alumno_cod = a.codalumno and ac5.acuerdo_num = 5 and ac5.salon =intSalon and ac5.acuerdo_relacion = intTipo
+	left join acuerdos_orientacion ac6 on ac6.alumno_cod = a.codalumno and ac6.acuerdo_num = 6 and ac6.salon =intSalon and ac6.acuerdo_relacion = intTipo
+	left join acuerdos_orientacion ac7 on ac7.alumno_cod = a.codalumno and ac7.acuerdo_num = 7 and ac7.salon =intSalon and ac7.acuerdo_relacion = intTipo
+	left join acuerdos_orientacion ac8 on ac8.alumno_cod = a.codalumno and ac8.acuerdo_num = 8 and ac8.salon =intSalon and ac8.acuerdo_relacion = intTipo
+	left join acuerdos_orientacion ac9 on ac9.alumno_cod = a.codalumno and ac9.acuerdo_num = 9 and ac9.salon =intSalon and ac9.acuerdo_relacion = intTipo
+	left join acuerdos_orientacion ac10 on ac10.alumno_cod = a.codalumno and ac10.acuerdo_num = 10 and ac10.salon =intSalon and ac10.acuerdo_relacion = intTipo
+	where
+		sa.codsalones=intSalon  
+		and us.role in(  'alumno' )
+		and db. swactivo=1  
+		and db.sweliminado	= 0 
+		and a.swretirado	= 0
+		and a.swanulado	= 0
+	 
+		order by lo.nomlocales, a.codgrado, a.codgrupo;
+END

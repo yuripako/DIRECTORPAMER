@@ -120,6 +120,37 @@ class DirectorPamerController extends AppController {
 
 
     // ----------- METODOS DE ERICK HUARACHA -----------
+    public function proyecciones() {
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('objJS','<link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../js/librerias/direct_proyecciones.js?'.date('YmdH').'"></script>');
+        $usuario = $this->Session->read('usuario');
+    }
+
+    public function morosidad() {
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_morosidad.js?'.date('YmdH').'"></script>');
+        $usuario = $this->Session->read('usuario');
+    }
+    public function conversaciones_promedio() {
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_conversa_prom.js?'.date('YmdH').'"></script>');
+        $usuario = $this->Session->read('usuario');
+    }
+    public function frecuencia() {
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_frecuencia.js?'.date('YmdH').'"></script>');
+        $usuario = $this->Session->read('usuario');
+    }
+    public function detalle_orientacion() {
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_detalle_orientacion.js?'.date('YmdH').'"></script>');
+        $usuario = $this->Session->read('usuario');
+    }
     // ----------- FIN METODOS DE ERICK HUARACHA -----------
 
     public function getdatos($op = null) {
