@@ -37,8 +37,8 @@ http://localhost/pamervirtual/DirectorPamer/vistameta
 
 ==========NOMBRE DEL MENU================
 
-OBS: ERICK PRADO. PORFA ENLAZA LA RUTA POR MENU EN LA RUTA PARCIAL
-HASLE SABER A RULY.
+OBS: ERICK PRADO. PORFA ENLAZA LA RUTA PARCIAL CON EL DE MENU DE LA PLATAFORMA 
+PAMER HASLE SABER A RULY.
 
 ==========STORE PROCEDURE RUTA =============================
 
