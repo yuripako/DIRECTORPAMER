@@ -8,30 +8,48 @@ DirectorPamerController.php
 
 OBS: SIEMPRE CHANTA EL CONTROLADOR
 ==========JS============================
-
-vistadirectorasistencia.js
-vistaseleccionado.js
-
+vistacepeva
+vistadirectorasistencia
+vistadirectormeritosalon
+vistameta
+vistaseleccionado
+vistasingresantes
+vistasingresantesdetalle
 ==========VIEW==========================
 
 DirectorPamer/vistadirectorasistencia.ctp
+DirectorPamer/vistadirectormeritosalon.ctp
+DirectorPamer/vistameta.ctp
 DirectorPamer/vistaseleccionado.ctp
-
+DirectorPamer/vistasingresantes.ctp
+DirectorPamer/vistasingresantesdetalle.ctp
 ==========RUTA PARCIAL==========================
-
+RUTA : 
+http://localhost/pamervirtual/DirectorPamer/vistadirector
+http://localhost/pamervirtual/DirectorPamer/vistadirectormeritosalon
+http://localhost/pamervirtual/DirectorPamer/vistadirectoreva
+http://localhost/pamervirtual/DirectorPamer/vistadirectoracademico
+http://localhost/pamervirtual/DirectorPamer/vistadirectorcuadropregunta
 http://localhost/pamervirtual/DirectorPamer/vistadirectorasistencia
-http://localhost/pamervirtual/Directorpamer/vistaseleccionado
+http://localhost/pamervirtual/DirectorPamer/vistaseleccionado
+http://localhost/pamervirtual/DirectorPamer/vistasingresantes
+http://localhost/pamervirtual/DirectorPamer/vistameta
 
 ==========NOMBRE DEL MENU================
 
-*Rendimiento académico
-     _	Asistencia de alumnos
-     _ Alumnos seleccionados
-
-OBS: PERFIL DIRECTOR 
+OBS: ERICK PRADO. PORFA ENLAZA LA RUTA POR MENU EN LA RUTA PARCIAL
+HASLE SABER A RULY.
 
 ==========STORE PROCEDURE RUTA =============================
 
 SP / SP_EDGAR /SP1
 SP / SP_EDGAR /SP2
+SP / SP_EDGAR /SP3
+SP / SP_EDGAR /SP4
+SP / SP_EDGAR /SP5
+SP / SP_EDGAR /SP6
+SP / SP_EDGAR /SP7
+SP / SP_EDGAR /SP8
+SP / SP_EDGAR /SP9
+
 

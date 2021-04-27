@@ -1,0 +1,22 @@
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_DIRECTOR_xxx_GUARDARINGRESANTES`(
+_codciclo int,
+_codlinea int,
+_codsalon int,
+_codalumno INT,
+_rpta VARCHAR(5),
+_puntaje VARCHAR(10)
+)
+BEGIN
+
+DECLARE count INT;
+SELECT count(*) INTO count FROM ingesantesdetalle WHERE codalumno=_codalumno;
+IF count > 0 then
+UPDATE ingesantesdetalle SET codciclo=_codciclo, codlinea=_codlinea, codsalon=_codsalon,
+	codalumno= _codalumno, ingreso=_rpta, puntaje=_puntaje, fechacreacion=NOW()
+   WHERE codalumno=_codalumno;
+ELSE 
+INSERT INTO ingesantesdetalle VALUES(_codciclo, _codlinea , _codsalon, _codalumno , _rpta , _puntaje, NOW());
+	   
+END IF;
+
+END

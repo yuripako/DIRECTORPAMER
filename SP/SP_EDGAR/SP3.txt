@@ -1,0 +1,26 @@
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_DIRECTOR_ALUMNOS_xxx_SELECCIONAR`(
+	_codsalon INT
+	)
+BEGIN
+		SELECT 
+							db.codfox, 
+						CONCAT(
+							SEG_NEGOCIOS_DES(db.apellidopa, 'f3bd7fd075e3d803d9c4b4db36816dec', '260139e4406a35bf618ac17f0cdf34cf') ," ",
+							SEG_NEGOCIOS_DES(db.apellidoma, 'f3bd7fd075e3d803d9c4b4db36816dec', '260139e4406a35bf618ac17f0cdf34cf') , " ",
+							SEG_NEGOCIOS_DES(db.nombre, 'f3bd7fd075e3d803d9c4b4db36816dec', '260139e4406a35bf618ac17f0cdf34cf') , " ",
+							SEG_NEGOCIOS_DES(db.nombre2, 'f3bd7fd075e3d803d9c4b4db36816dec', '260139e4406a35bf618ac17f0cdf34cf') 
+						) estudiante,
+					    ing.ingreso,
+							ing.puntaje
+						FROM datos_basicos db 
+						left join  alumnos a on db.codfox=a.codalumno
+						left join ccostos as cc  on a.codccosto=cc.codccostos
+						left join lineas as li on cc.codlinea=li.codlinea
+						left join salones as sa on a.codsalon=sa.codsalones
+						LEFT JOIN  alumnos_tipopag tip on tip.codtipopag = a.codtipopag 
+						LEFT JOIN  ingesantesdetalle ing on ing.codalumno=a.codalumno
+						where  
+						 a.codsalon= _codsalon -- 13111
+						AND db.swactivo=1 ;
+						
+		END

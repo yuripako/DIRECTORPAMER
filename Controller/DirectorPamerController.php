@@ -116,6 +116,45 @@ class DirectorPamerController extends AppController {
     }
 
 
+    public function vistasingresantes() {  // ALUMNOS INGRESANTES
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistasingresantes.js?12"></script>');
+        $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
+    }
+
+    public function vistasingresantesdetalle() {  // ALUMNOS INGRESANTES
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistasingresantesdetalle.js?3"></script>');
+        $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
+    }
+
+
+
+    public function vistameta() {  // MANTENIMIENTO METAS
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistameta.js?2"></script>');
+        $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
+    }
+
+
+
+
+
     // ----------- FIN METODOS DE EDGAR -----------
 
 
@@ -322,6 +361,48 @@ class DirectorPamerController extends AppController {
                             $sql = " CALL  SP_DIRECTOR_ALUMNOSxxxSELECCIONADOS($codciclo,$codlinea,'$meses'); ";
                             exit(AppController::getDataTable($sql));  
                         break;
+
+                        case 65:                          
+                            $codsalon =  $this->request->data['codsalon'];                       
+                            $sql = " CALL  SP_DIRECTOR_ALUMNOS_xxx_SELECCIONAR($codsalon); ";
+                            exit(AppController::getDataTable($sql));  
+                        break;
+
+                        case 66:                          
+                       
+                            $codciclo =  $this->request->data['codciclo'];  
+                            $codlinea =  $this->request->data['codlinea'];  
+                            $codsalon =  $this->request->data['codsalon'];  
+                            $codalumno =  $this->request->data['codalumno'];  
+                            $rpta =  $this->request->data['rpta']; 
+                            $nota =  $this->request->data['nota'];                     
+             $sql = " CALL  SP_DIRECTOR_xxx_GUARDARINGRESANTES($codciclo,$codlinea,$codsalon,$codalumno,'$rpta','$nota'); ";
+                            exit(AppController::getDataTable($sql));  
+                        break;
+
+                        case 67:                          
+                            $codciclo =  $this->request->data['codciclo']; 
+                            $codlinea =  $this->request->data['codlinea'];                     
+                            $sql = " CALL  SP_DIRECTOR_ALUMNOS_xxx_VISTA($codciclo,$codlinea); ";
+                            exit(AppController::getDataTable($sql));  
+                        break;
+
+
+                        case 68:                          
+                                      
+                            $sql = "   CALL SP_SALONES_META() ";
+                            exit(AppController::getDataTable($sql));  
+                        break;
+
+                        case 69:                          
+                            $codsalon =  $this->request->data['codsalon']; 
+                            $meta =  $this->request->data['meta'];         
+                            $sql = "  CALL SP_DIRECTOR_xxx_CRUD_META($meta,$codsalon); ";
+                            exit(AppController::getDataTable($sql));  
+                        break;
+
+
+
                         
                     // ----------- FIN GET DE EDGAR -----------
 
@@ -366,6 +447,13 @@ class DirectorPamerController extends AppController {
                         $sql = "CALL SP_DIRECTOR_ACUERDO_DETALLE(".$codacuerdo.")";
                         AppController::getDataTable($sql);
                         break;
+
+
+
+
+
+
+
                     // ----------- FIN GET DE ERICK HUARACHA -----------
                     
                 }
