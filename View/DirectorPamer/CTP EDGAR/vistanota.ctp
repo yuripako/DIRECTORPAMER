@@ -950,7 +950,7 @@
 	<body>
 		<div class="general">
 			<div class="reporte-asistencia">
-				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / PROCESOS ADMINISTRADOS /<a class="enlace" href="#" target="_self">ALUMNOS SELECCIONADOS</a></div>
+				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / PROCESOS DE TUTORÍA /<a class="enlace" href="#" target="_self"> INGRESO DE NOTA ESCOLAR</a></div>
 				<div class="barra-filtro">
 					<div class="listado-custom" custom="salones-listado"></div>
 					<div class="listado-custom" custom="alumnos-listado"></div>
@@ -1045,7 +1045,7 @@
 										</div>
 									</div>
 									<!-- INICIO TABLA-->
-									<div id="tblMerito" class="table-wrapper" style="height:400px; overflow:auto; width: 100%;" >
+									<div id="tblMerito" class="table-wrapper" style="height:500px; overflow:auto; width: 100%;" >
 										<table class="table table-bordered table-striped table-hover" id="tableprod">
 											<thead>
                                               <tr id="cabeza" style="    text-transform: uppercase;"></tr>
@@ -1064,13 +1064,7 @@
 											<div class="imagen"><img src="../img/tutorimg/excel.png" /></div>
 											<div class="texto">Descargar</div>
 										</div>
-										&nbsp;&nbsp;
-										<a href="../DirectorPamer/vistasingresantesdetalle">
-										<div class="boton" >
-											<div class="imagen"><img style="width: 32px;" src="https://cdn.icon-icons.com/icons2/412/PNG/128/DocumentEdit_40924.png" /></div>
-											<div class="texto">Mantenimiento</div>
-										</div>
-										</a>
+									
 									
 									</div>
 								</div>

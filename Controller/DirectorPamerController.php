@@ -153,6 +153,17 @@ class DirectorPamerController extends AppController {
 
 
 
+    public function vistanota() {  // INGRESO DE NOTAS
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistanota.js?122"></script>');
+        $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
+    }
+
 
 
     // ----------- FIN METODOS DE EDGAR -----------
@@ -401,6 +412,12 @@ class DirectorPamerController extends AppController {
                             exit(AppController::getDataTable($sql));  
                         break;
 
+                        case 70:                          
+                            $codciclo =  $this->request->data['codciclo']; 
+                            $codlinea =  $this->request->data['codlinea'];                     
+                            $sql = " CALL  SP_DIRECTOR_ALUMNOS_xxx_VISTANOTA($codciclo,$codlinea); ";
+                            exit(AppController::getDataTable($sql));  
+                        break;
 
 
                         

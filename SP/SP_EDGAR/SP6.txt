@@ -1,9 +1,0 @@
-CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_SALONES_META`()
-BEGIN
-SELECT  
-a.codsalones,a.nomsalones,a.codciclo,b.meta 
-FROM salones a
-LEFT JOIN meta b on a.codsalones = b.codsalon
-WHERE
-a.codciclo=(SELECT codciclo FROM salones ORDER BY codsalones DESC LIMIT 1);
-END

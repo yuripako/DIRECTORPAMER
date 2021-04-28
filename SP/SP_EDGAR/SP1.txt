@@ -1,121 +1,26 @@
-CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_DIRECTOR_ASISxxxSALONES`(
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_DIRECTOR_ALUMNOS_xxx_VISTANOTA`(
 _codciclo INT,
-_codlinea INT,
-_fecha VARCHAR(33)
+_codlinea INT
 )
 BEGIN
--- DECLARE _fini1 VARCHAR(33);
--- DECLARE _fini2 VARCHAR(33);
--- DECLARE _fini3 VARCHAR(33);
--- DECLARE _fini4 VARCHAR(33);
 
-SET @fini1=_fecha; -- martes
-SET @fini2=DATE_ADD(@fini1,INTERVAL 1 DAY); --  miercoles
-SET @fini3=DATE_ADD(@fini2,INTERVAL 2 DAY); -- jueves
-SET @fini4=DATE_ADD(@fini3,INTERVAL 3 DAY); -- viernes
-
-SELECT*
-FROM
-(
 SELECT
-tbl1.codciclo,tbl1.nomlinea,tbl1.nomsalones,tbl1.datos,tbl1.cantidad,
-tbl2.martes,tbl3.miercoles,tbl4.jueves,tbl5.viernes
+tbl1.codsalones, tbl1.codciclo,tbl1.nomlinea, tbl1.nomsalones,tbl1.tutor,tbl1.cantidad,
+tbl1.modificadopor,tbl1.nota
 FROM
 (
 SELECT
 b.codciclo,d.codlinea,d.nomlinea,b.codsalones, b.nomsalones, 
-CONCAT(a.apellidos," ",a.nombres) datos,
-COUNT(DISTINCT alu.codalumno) cantidad
+CONCAT(a.apellidos," ",a.nombres) tutor,
+COUNT(DISTINCT alu.codalumno) cantidad,bb.nota,bb.modificadopor
 FROM tutores a
-INNER  JOIN salones b on a.codtutor =b.codtutor
-INNER JOIN ccostos c on c.codccostos= b.codccosto
-INNER JOIN lineas d on d.codlinea=c.codlinea
-INNER JOIN alumnos alu on alu.codsalon=b.codsalones
+LEFT  JOIN salones b on a.codtutor =b.codtutor
+LEFT JOIN ccostos c on c.codccostos= b.codccosto
+LEFT JOIN lineas d on d.codlinea=c.codlinea
+LEFT JOIN alumnos alu on alu.codsalon=b.codsalones
+LEFT JOIN  gein_notaescolar bb on bb.codalumno = alu.codalumno
 WHERE alu.codciclo=_codciclo  AND c.codlinea=_codlinea
 GROUP BY b.codsalones
-) tbl1
-LEFT JOIN
-(
-	SELECT 
-	a.codsalon,
-	(CASE WHEN @fini1=DATE(@fini1) THEN 
-	CONCAT(
-	COUNT(DISTINCT nombre_curso ) ," | ",
-	COUNT(CASE WHEN a.asistencia = 1 THEN 1 END) ," | ",
-	COUNT(CASE WHEN a.asistencia = 2 THEN 1 END) 
-	) 
-	ELSE NULL END) as martes
-
-	FROM distancia_asistencia  a
-	LEFT JOIN distancia_cursos b on a.codcurso = b.id 
-	LEFT JOIN salones c on c.codsalones=a.codsalon
-	WHERE b.linea=_codlinea AND convert(a.fecha,date)=@fini1
-	AND c.codciclo=_codciclo
-	GROUP BY 1
-) tbl2 on tbl2.codsalon = tbl1.codsalones
-
-LEFT JOIN
-(
-	SELECT 
-	a.codsalon,
-	(CASE WHEN @fini2=DATE(@fini2) THEN 
-	CONCAT(
-	COUNT(DISTINCT nombre_curso ) ," | ",
-	COUNT(CASE WHEN a.asistencia = 1 THEN 1 END) ," | ",
-	COUNT(CASE WHEN a.asistencia = 2 THEN 1 END) 
-	) 
-	ELSE NULL END) as miercoles
-
-	FROM distancia_asistencia  a
-	LEFT JOIN distancia_cursos b on a.codcurso = b.id 
-	LEFT JOIN salones c on c.codsalones=a.codsalon
-	WHERE b.linea=_codlinea AND convert(a.fecha,date)=@fini2
-	AND c.codciclo=_codciclo
-	GROUP BY 1
-) tbl3 on tbl3.codsalon =  tbl2.codsalon
-
-
-LEFT JOIN
-(
-	SELECT 
-	a.codsalon,
-	(CASE WHEN @fini3=DATE(@fini3) THEN 
-	CONCAT(
-	COUNT(DISTINCT nombre_curso ) ," | ",
-	COUNT(CASE WHEN a.asistencia = 1 THEN 1 END) ," | ",
-	COUNT(CASE WHEN a.asistencia = 2 THEN 1 END) 
-	) 
-	ELSE NULL END) as jueves
-
-	FROM distancia_asistencia  a
-	LEFT JOIN distancia_cursos b on a.codcurso = b.id 
-	LEFT JOIN salones c on c.codsalones=a.codsalon
-	WHERE b.linea=_codlinea AND convert(a.fecha,date)=@fini3
-	AND c.codciclo=_codciclo
-	GROUP BY 1
-) tbl4 on tbl4.codsalon = tbl3.codsalon
-
-
-LEFT JOIN
-(
-	SELECT 
-	a.codsalon,
-	(CASE WHEN @fini4=DATE(@fini4) THEN 
-	CONCAT(
-	COUNT(DISTINCT nombre_curso ) ," | ",
-	COUNT(CASE WHEN a.asistencia = 1 THEN 1 END) ," | ",
-	COUNT(CASE WHEN a.asistencia = 2 THEN 1 END) 
-	) 
-	ELSE NULL END) as viernes
-
-	FROM distancia_asistencia  a
-	LEFT JOIN distancia_cursos b on a.codcurso = b.id 
-	LEFT JOIN salones c on c.codsalones=a.codsalon
-	WHERE b.linea=_codlinea AND convert(a.fecha,date)=@fini4
-	AND c.codciclo=_codciclo
-	GROUP BY 1
-) tbl5 on tbl5.codsalon = tbl4.codsalon 
-
-
-) tbltot;
+)tbl1
+GROUP BY tbl1.codsalones;
 END
