@@ -14,7 +14,10 @@ OBS: SIEMPRE CHANTA EL CONTROLADOR
 OBS:
 ==========VIEW==========================
 
-DirectorPamer/
+DirectorPamer/morosidad.ctp
+DirectorPamer/conversaciones_promedio.ctp
+DirectorPamer/frecuencia.ctp
+DirectorPamer/detalle_orientacion.ctp
 
 OBS:
 

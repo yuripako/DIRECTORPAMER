@@ -37,10 +37,6 @@
 							<div class="selectd">
 								<span class="placeholder">Seleccionar</span>
 								<ul id="selectLinea">
-                                    <li onclick="loadtutores(1,this);">Católica Talento</li>
-                                    <li onclick="loadtutores(31,this);">Virtual San Marcos</li>
-                                    <li onclick="loadtutores(36,this);">Virtual UNI</li>
-                                    <li onclick="loadtutores(37,this);">Virtual Privado</li>
 								</ul>
 							</div>
 						</div>
@@ -100,7 +96,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td style="text-align: center;" colspan="7">Seleccione Salón</td>
+									<td style="text-align: center;" colspan="3">Seleccione Salón</td>
 								</tr>
 							</tbody>
 						</table>
