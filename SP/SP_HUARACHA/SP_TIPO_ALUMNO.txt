@@ -1,4 +1,0 @@
-CREATE DEFINER=`developer2021`@`%` PROCEDURE `pamervirtual`.`SP_TIPO_ALUMNO`()
-BEGIN
-	SELECT DISTINCT grupodes FROM alumnos_tipopag ORDER BY grupodes ASC;
-END

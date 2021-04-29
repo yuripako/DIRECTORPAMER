@@ -173,32 +173,32 @@ class DirectorPamerController extends AppController {
     public function proyecciones() {
         AppController::isAuthorized();
         $this->layout = 'pages';
-        $this->set('objJS','<link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../js/librerias/direct_proyecciones.js?'.date('YmdH').'"></script>');
+        $this->set('objJS','<link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../js/librerias/direct_proyecciones.js?'.date('YmdHis').'"></script>');
         $usuario = $this->Session->read('usuario');
     }
 
     public function morosidad() {
         AppController::isAuthorized();
         $this->layout = 'pages';
-        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_morosidad.js?'.date('YmdH').'"></script>');
+        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_morosidad.js?'.date('YmdHis').'"></script>');
         $usuario = $this->Session->read('usuario');
     }
     public function conversaciones_promedio() {
         AppController::isAuthorized();
         $this->layout = 'pages';
-        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_conversa_prom.js?'.date('YmdH').'"></script>');
+        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_conversa_prom.js?'.date('YmdHis').'"></script>');
         $usuario = $this->Session->read('usuario');
     }
     public function frecuencia() {
         AppController::isAuthorized();
         $this->layout = 'pages';
-        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_frecuencia.js?'.date('YmdH').'"></script>');
+        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_frecuencia.js?'.date('YmdHis').'"></script>');
         $usuario = $this->Session->read('usuario');
     }
     public function detalle_orientacion() {
         AppController::isAuthorized();
         $this->layout = 'pages';
-        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_detalle_orientacion.js?'.date('YmdH').'"></script>');
+        $this->set('objJS','<link rel="stylesheet" href="../plugins/toastrAlert/toastr.css"><link rel="stylesheet" href="../css/academia_clasedigital.css?5"><script src="../plugins/toastrAlert/toastr.min.js"></script><script src="../js/librerias/direct_detalle_orientacion.js?'.date('YmdHis').'"></script>');
         $usuario = $this->Session->read('usuario');
     }
     // ----------- FIN METODOS DE ERICK HUARACHA -----------
@@ -387,7 +387,7 @@ class DirectorPamerController extends AppController {
                             $codalumno =  $this->request->data['codalumno'];  
                             $rpta =  $this->request->data['rpta']; 
                             $nota =  $this->request->data['nota'];                     
-             $sql = " CALL  SP_DIRECTOR_xxx_GUARDARINGRESANTES($codciclo,$codlinea,$codsalon,$codalumno,'$rpta','$nota'); ";
+                            $sql = " CALL  SP_DIRECTOR_xxx_GUARDARINGRESANTES($codciclo,$codlinea,$codsalon,$codalumno,'$rpta','$nota'); ";
                             exit(AppController::getDataTable($sql));  
                         break;
 
@@ -440,7 +440,8 @@ class DirectorPamerController extends AppController {
                     case 104:
                         $codlinea =  $this->request->data['codlinea'];   
                         $codciclo =  $this->request->data['codciclo']; 
-                        $sql = "CALL SP_DIRECTOR_CONVER_PROMEDIO(".$codciclo.",".$codlinea.")";
+                        $tipo =  $this->request->data['tipo']; 
+                        $sql = "CALL SP_DIRECTOR_CONVER_PROMEDIO(".$codciclo.",".$codlinea.",'".$tipo."')";
                         AppController::getDataTable($sql);
                         break;
                     case 105:
@@ -464,13 +465,11 @@ class DirectorPamerController extends AppController {
                         $sql = "CALL SP_DIRECTOR_ACUERDO_DETALLE(".$codacuerdo.")";
                         AppController::getDataTable($sql);
                         break;
-
-
-
-
-
-
-
+                    case 109:
+                        $codciclo =  $this->request->data['codciclo'];
+                        $sql = "CALL SP_DIRECTOR_LINEA_X_CICLO(".$codciclo.")";
+                        AppController::getDataTable($sql);
+                        break;
                     // ----------- FIN GET DE ERICK HUARACHA -----------
                     
                 }

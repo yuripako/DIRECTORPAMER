@@ -58,7 +58,7 @@ function carga_inicial() {
                 var vCiclos = data.data;
                 var vHtml = "";
                 $.each(vCiclos, function(index, value) {
-                    vHtml += '<li onclick="getCiclo('+vCiclos[index]+',this)">'+vCiclos[index]+'</li>';
+                    vHtml += '<li onclick="getLineas('+vCiclos[index]+',this)">'+vCiclos[index]+'</li>';
                 });
                 $("#preloader").hide(10);
                 $("#selectCiclo").html(vHtml);
@@ -75,18 +75,49 @@ function carga_inicial() {
         });
 }
 
-function getCiclo(valor,e){
+function getLineas(valor,e){
     var ulparent = $(e).parent();
     ulparent.attr('data-value',valor);
-    $('#selectLinea').prev().text('Seleccionar');
+    $('#selectLinea').prev().text('Cargando...');
     $('#selectLinea').attr('data-value','');
+    $("#selectLinea").html('');
+    $('#selectTutor').prev().text('Seleccionar');
+    $('#selectTutor').attr('data-value','');
+    $('#selectTutor').html('');
+    $('#selectSalon').prev().text('Seleccionar');
+    $('#selectSalon').attr('data-value','');
+    $('#selectSalon').html('');
+    var datosOK = "";
+    var strUrl = "getdatos/109";
+    var aParam = '';
+    $.ajax({
+        type: "post",
+        url: strUrl,
+        data:  {codciclo:valor},
+        dataType: "html",
+        success: function (response) {
+            data = segdeNegocios(response);
+            datosOK = data.message.toUpperCase();
+    
+            if (datosOK == "OK") {
+                var datos = data.data;
+                var vHtml = "";
+                $.each(datos, function(index, value) { 
+                    vHtml += '<li onclick="loadtutores('+datos[index][0]+',this,null)">'+datos[index][1]+'</li>';
+                });
+                $("#selectLinea").html(vHtml);
+                $('#selectLinea').prev().text('Seleccionar');
+            } else {
+                viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
+            }
+        }
+    });
 }
-
 function loadtutores(valor,e) {
     var codciclo = $("#selectCiclo").attr('data-value');
     var codlinea = valor;
     $(e).parent().attr('data-value',valor);
-    $('#selectTutor').prev().text('Seleccionar');
+    $('#selectTutor').prev().text('Cargando...');
     $('#selectTutor').attr('data-value','');
     $('#selectTutor').html('');
     $('#selectSalon').prev().text('Seleccionar');
@@ -112,6 +143,7 @@ function loadtutores(valor,e) {
                     vHtml += '<li onclick="loadsalones('+datos[index][1]+',this)">'+datos[index][2]+'</li>'; 
                 });
                 $("#selectTutor").html(vHtml);
+                $('#selectTutor').prev().text('Seleccionar');
             } else {
                 viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
             }
@@ -121,7 +153,7 @@ function loadtutores(valor,e) {
 
 
 function loadsalones(cosalones) {
-    $('#selectSalon').prev().text('Seleccionar');
+    $('#selectSalon').prev().text('Cargando...');
     $('#selectSalon').attr('data-value','');
     var datosOK = "";
     var strUrl = "getdatos/51";
@@ -143,6 +175,7 @@ function loadsalones(cosalones) {
                     vHtml += '<li onclick="loadReporte('+datos[index][0]+',this,null);" >'+ datos[index][3]+" - "+ datos[index][1]+'</li>'; 
                 });
                 $("#selectSalon").html(vHtml);
+                $('#selectSalon').prev().text('Seleccionar');
             } else {
                 viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
             }
@@ -160,10 +193,9 @@ function getReporte(tipo,e){
     }
 }
 function loadReporte(valor,e,tipo) {
-        if(e !== null){
-            $(e).parent().attr('data-value',valor);
-        }else{
+        if(tipo== null){
             tipo = $("#selectTipo").attr('data-value');
+            $(e).parent().attr('data-value',valor);
         }
         var codsalon = valor;
         var datosOK = "";
@@ -182,15 +214,19 @@ function loadReporte(valor,e,tipo) {
                 if (datosOK == "OK") {
                     var datos = data.data;
                     var vHtml = "";
-                    $.each(datos, function(index, value) { 
-                        vHtml += '<tr><td>0</td><td>'+datos[index][1]+'</td><td></td></tr>';
-                        vHtml += '<tr><td>1</td><td>'+datos[index][2]+'</td><td></td></tr>';
-                        vHtml += '<tr><td>2</td><td>'+datos[index][3]+'</td><td></td></tr>';
-                        vHtml += '<tr><td>3</td><td>'+datos[index][4]+'</td><td></td></tr>';
-                        vHtml += '<tr><td>4</td><td>'+datos[index][5]+'</td><td></td></tr>';
-                        vHtml += '<tr><td>5 a más</td><td>'+datos[index][6]+'</td><td></td></tr>';
-                        vHtml += '<tr><td style="background-color: #d9edf7;"><b>TOTAL</b></td><td style="background-color: #d9edf7;"><b>'+datos[index][0]+'</b></td><td></td></tr>';
-                    });
+                    if(datos.length > 0){
+                        $.each(datos, function(index, value) { 
+                            vHtml += '<tr><td>0</td><td>'+datos[index][1]+'</td><td></td></tr>';
+                            vHtml += '<tr><td>1</td><td>'+datos[index][2]+'</td><td></td></tr>';
+                            vHtml += '<tr><td>2</td><td>'+datos[index][3]+'</td><td></td></tr>';
+                            vHtml += '<tr><td>3</td><td>'+datos[index][4]+'</td><td></td></tr>';
+                            vHtml += '<tr><td>4</td><td>'+datos[index][5]+'</td><td></td></tr>';
+                            vHtml += '<tr><td>5 a más</td><td>'+datos[index][6]+'</td><td></td></tr>';
+                            vHtml += '<tr><td style="background-color: #d9edf7;"><b>TOTAL</b></td><td style="background-color: #d9edf7;"><b>'+datos[index][0]+'</b></td><td></td></tr>';
+                        });
+                    }else{
+                        vHtml += '<tr><td colspan="3" style="text-align: center;padding: 20px 0;"><b>No se encontró información</b></td></tr>';
+                    }
                     $("#tbfrecuencia tbody").html(vHtml);
                     
                 } else {

@@ -1,0 +1,10 @@
+CREATE PROCEDURE `pamervirtual`.`SP_DIRECTOR_LINEA_X_CICLO`(
+	intCiclo int
+)
+BEGIN
+	select l.codlinea, l.nomlinea from salones s 
+	left join ccostos c on c.codccostos = s.codccosto 
+	left join lineas l on l.codlinea = c.codlinea 
+	where s.codciclo = intCiclo
+	group by l.codlinea;
+END

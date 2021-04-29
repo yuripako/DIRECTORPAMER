@@ -27,11 +27,10 @@ function carga_inicial() {
                 var vCiclos = data.data;
                 var vHtml = "";
                 $.each(vCiclos, function(index, value) {
-                    vHtml += '<li onclick="getCiclo('+vCiclos[index]+',this)">'+vCiclos[index]+'</li>';
+                    vHtml += '<li onclick="getLineas('+vCiclos[index]+',this)">'+vCiclos[index]+'</li>';
                 });
                 $("#preloader").hide(10);
                 $("#selectCiclo").html(vHtml);
-                //$('#selectArea > li:first').trigger("click");
             } else {
                 $("#preloader").hide(10);
                 viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
@@ -45,11 +44,37 @@ function carga_inicial() {
         });
 }
 
-function getCiclo(valor,e){
+function getLineas(valor,e){
     var ulparent = $(e).parent();
     ulparent.attr('data-value',valor);
-    $('#selectLinea').prev().text('Seleccionar');
+    $('#selectLinea').prev().text('Cargando...');
     $('#selectLinea').attr('data-value','');
+    $("#selectLinea").html('');
+    var datosOK = "";
+    var strUrl = "getdatos/109";
+    var aParam = '';
+    $.ajax({
+        type: "post",
+        url: strUrl,
+        data:  {codciclo:valor},
+        dataType: "html",
+        success: function (response) {
+            data = segdeNegocios(response);
+            datosOK = data.message.toUpperCase();
+    
+            if (datosOK == "OK") {
+                var datos = data.data;
+                var vHtml = "";
+                $.each(datos, function(index, value) { 
+                    vHtml += '<li onclick="loadtutores('+datos[index][0]+',this)">'+datos[index][1]+'</li>';
+                });
+                $("#selectLinea").html(vHtml);
+                $('#selectLinea').prev().text('Seleccione');
+            } else {
+                viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
+            }
+        }
+    });
 }
 
 function loadtutores(valor,e) {
@@ -84,15 +109,20 @@ function loadtutores(valor,e) {
                     var vHtml = "";
                     var linea = 0;
                     var flag = true;
-                    $.each(datos, function(index, value) { 
-                        if(flag){
-                            flag = false;
-                            vHtml += '<tr><td style="font-weight: 700;">'+datos[index][1]+'</td><td></td><td colspan="5"></td></tr>';
-                        }
-                        
-                        vHtml += '<tr><td>'+datos[index][2]+'</td><td>'+datos[index][3]+'</td><td>'+datos[index][4]+'</td><td>'+datos[index][5]+'</td><td>'+datos[index][6]+'</td><td>'+datos[index][7]+'</td>';
-                        vHtml += '<td>'+(parseInt(datos[index][4])+parseInt(datos[index][5])+parseInt(datos[index][6])+parseInt(datos[index][7]))+'</td></tr>'; 
-                    });
+                    if(datos.length > 0){
+                        $.each(datos, function(index, value) { 
+                            if(flag){
+                                flag = false;
+                                vHtml += '<tr><td style="font-weight: 700;">'+datos[index][1]+'</td><td></td><td colspan="5"></td></tr>';
+                            }
+                            
+                            vHtml += '<tr><td>'+datos[index][2]+'</td><td>'+datos[index][3]+'</td><td>'+datos[index][4]+'</td><td>'+datos[index][5]+'</td><td>'+datos[index][6]+'</td><td>'+datos[index][7]+'</td>';
+                            vHtml += '<td>'+(parseInt(datos[index][4])+parseInt(datos[index][5])+parseInt(datos[index][6])+parseInt(datos[index][7]))+'</td></tr>'; 
+                        });
+                    }else{
+                        vHtml += '<tr><td colspan="7" style="text-align: center;padding: 20px 0;"><b>No se encontró información</b></td></tr>';
+                    }
+                    
                     $("#tbmorosidad tbody").html(vHtml);
                     
                 } else {
