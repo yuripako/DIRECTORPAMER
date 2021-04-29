@@ -8,19 +8,6 @@
 		<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-        <!--CALENDAR -->
-
-		<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<link rel="stylesheet" href="/resources/demos/style.css">
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-
-        <style>
-    .ui-datepicker-calendar {
-        display: none;
-    }
-    </style>
 		<style type="text/css">
 			html, body{
 			padding:0px;
@@ -42,10 +29,10 @@
 			#meritoalu tr td:first-letter {
 			text-transform: uppercase;
 			}
-			#cuerpo tr td {
+			#data tr td {
 			text-transform: lowercase;
 			}
-			#cuerpo tr td:first-letter {
+			#data tr td:first-letter {
 			text-transform: uppercase;
 			} 
 			.table {
@@ -58,7 +45,7 @@
 			border:0px !important;
 			}
 			table, th, td {
-			border: 1px solid #ccc;
+			border: 1px solid #fff;
 			}
 			/* width */
 			::-webkit-scrollbar {
@@ -163,7 +150,7 @@
 			.table-wrapper thead th { position: sticky; top: 0; }
 			/* Just common table stuff. Really. */
 			table  { border-collapse: collapse; width: 100%; }
-			th, td { padding: 8px 16px; }
+		
 			th     { background:#fff; }     
 			/* FINALIZO */
 			.general textarea, 
@@ -730,15 +717,7 @@
 					opacity: 0;
 				}
 			}
-            /*
-			#tableprod td, #tableprod th {
-				text-align: center;
-			}
-			table#tableprod td:first-child, table#tableprod th:first-child {
-				text-align: left;
-			}
-
-            */
+		
 			/******************************************************************************************************************************/
 		</style>
 		<script type="text/javascript">
@@ -950,22 +929,22 @@
 	<body>
 		<div class="general">
 			<div class="reporte-asistencia">
-				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / PROCESOS DE TUTORÍA /<a class="enlace" href="#" target="_self"> INGRESO DE NOTA ESCOLAR</a></div>
+				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / RENDIMIENTO ACADÉMICO / <a class="enlace" href="#" target="_self">RENDIMIENTO POR SALONES</a></div>
 				<div class="barra-filtro">
 					<div class="listado-custom" custom="salones-listado"></div>
 					<div class="listado-custom" custom="alumnos-listado"></div>
 					<div class="base1">
 						<div class="fondo1">
 							<div class="centro1">
-                            
-							
-                            <div class="salon" >
+
+
+								<div class="salon" >
 									<div class="arriba">
 										<div class="texto">CICLO</div>
 									</div>
                                     <div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-										<select name="" id="loadciclo"  class="form-control" onchange="tecargolinea()" >
+										<select name="" id="loadciclo"  class="form-control" onchange="tecargolinea()">
                                               
 											</select>
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
@@ -973,40 +952,133 @@
 										</div>
 									</div>
 								</div>
-                           
+
                                 <div class="alumno">
 									<div class="arriba">
 										<div class="texto">LÍNEA</div>
 									</div>
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-										<select name="" id="lineal"  class="form-control"  >
-										</select>	
+											<select name="lineal" id="lineal"  class="form-control" onchange="loadtutores();">
+                                                <!-- <option>Seleccionar</option>
+                                                <option value="1">Católica Talento</option>
+                                                <option value="31">Virtual San Marcos</option>
+                                                <option value="36">Virtual UNI</option>
+                                                <option value="37">Virtual Privado</option> -->
+											</select>
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
 												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
-
-
 										</div>
 									</div>
 								</div>
 
-								<div class="alumno">
+							
+
+                                <div class="alumno">
 									<div class="arriba">
-										<div class="texto">CONSULTAR</div>
+										<div class="texto">TUTOR</div>
 									</div>
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-											
-										
-										<button onclick="centinela();" type="button" style="  color: #fff;  background-color: #005cfe;" class="btn btn-default" aria-label="Left Align">
-											<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> CONSULTAR
-										</button>
-                                        <input type="hidden" id="numero" >
-
+											<select name=""   class="form-control" id="tutores" onchange="loadsalones();" >
+                                                
+											</select>
+											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
+												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
 										</div>
 									</div>
 								</div>
 
+                                <div class="alumno">
+									<div class="arriba">
+										<div class="texto">SALÓN</div>
+									</div>
+									<div class="abajo">
+										<div class="form-group" style="margin-top: 10px;">
+											<select name=""   class="form-control" id="salones" onchange="metodosalon();">
+                                               
+											</select>
+											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
+												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
+										</div>
+									</div>
+                                    <input type="hidden" id="codsaloni" >
+                                    <input type="hidden" id="codlini" >
+								</div>
+
+							
+
+								<div class="alumno" style="margin-right: 20px;">
+									<div class="arriba">
+										<div class="texto">TIPO DE ALUMNO</div>
+									</div>
+									<div class="abajo">
+										<div class="form-group" style="margin-top: 10px;">
+											<select name=""  id="tipo" class="form-control" onchange="metodotipo();">
+												<option value="msj">Selleccione</option>
+												<option value="REGULAR">REGULAR</option>
+												<option value="MEDIA BECA">MEDIA BECA</option>
+												<option value="BECA">BECA</option>
+                                                <option value="TODOS">TODOS</option>
+											</select>
+											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
+												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
+										</div>
+									</div>
+								</div>
+								<div class="alumno" style="margin-right: 20px;">
+									<div class="arriba">
+										<div class="texto">
+											DETALLE. <!-- <?php echo"<pre>"; print_r($usuario); echo"<pre/>" ?>-->
+										</div>
+									</div>
+
+
+									<div class="abajo">
+										<div class="form-group" style="margin-top: 10px;">
+										<div class="texto">
+											<span id="detallesim"></span>
+										</div>
+
+										</div>
+
+
+									</div>
+
+
+
+
+
+
+									<div class="abajo" style="display: none;">
+										<div class="form-group" style="margin-top: 10px;">
+											<select name=""  id="areainfo" class="form-control" onchange="metodoselectarea()">
+												<option id="opcion">Seleccione</option>
+											</select>
+											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
+												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
+										</div>
+
+
+									</div>
+								</div>
+								<div class="semana">
+									<div class="arriba">
+										<div class="texto">SELECCIONE SIMULACRO</div>
+									</div>
+									<div class="abajo">
+										<div class="cuadro">
+											<div class="izquierda desactivado">
+												<img src="../img/tutorimg/izquierda.png" />
+											</div>
+											<div class="centro" id="simu">
+											</div>
+											<div class="derecha activado">
+												<img src="../img/tutorimg/derecha.png" />
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="extra">
 								</div>
 							</div>
@@ -1019,13 +1091,24 @@
 							<div class="centro1">
 								<div class="titulo">
 									<div class="izquierda">
-										<div class="texto">Alumnos seleccionados.</div>
+										<div class="texto">Rendimiento por salones.</div>
 									</div>
 									<div class="derecha">
 								<div class="asistencia">
 									
-							
 								
+									<div class="opcion">
+										<div class="circulo" opcion="inasistencia" style="background-color: #24d483"></div>
+										<div class="texto">BUENAS</div>
+									</div>
+                                    <div class="opcion">
+										<div class="circulo" opcion="inasistencia" style="background-color: RED;"></div>
+										<div class="texto">MALAS</div>
+									</div>
+                                    <div class="opcion">
+										<div class="circulo" opcion="inasistencia" style="background-color: #ccc;"></div>
+										<div class="texto">EN BlANCO</div>
+									</div>
 								</div>
 							</div>
 								</div>
@@ -1042,13 +1125,19 @@
 										</div>
 									</div>
 									<!-- INICIO TABLA-->
-									<div id="tblMerito" class="table-wrapper" style="height:500px; overflow:auto; width: 100%;" >
+									<div id="tblMerito" class="table-wrapper" style="height:450px; overflow:auto; width: 100%;" >
 										<table class="table table-bordered table-striped table-hover" id="tableprod">
 											<thead>
-                                              <tr id="cabeza" style="    text-transform: uppercase;"></tr>
+											    <tr >
+													<th colspan="11" style="background-color: aliceblue;" id="detallesim2"> 
+
+											    	</th>
 												
+												</tr>
+												<tr id="cabeza">
+												</tr>
 											</thead>
-											<tbody id="cuerpo" ">
+											<tbody id="cuerpo">
 											</tbody>
 										</table>
 									</div>
@@ -1056,13 +1145,10 @@
 								</div>
 								<div class="descarga">
 									<div class="acciones">
-									
 										<div class="boton" onclick="fnExcelReport();">
 											<div class="imagen"><img src="../img/tutorimg/excel.png" /></div>
 											<div class="texto">Descargar</div>
 										</div>
-									
-									
 									</div>
 								</div>
 							</div>
@@ -1109,4 +1195,3 @@
 	}
 	
 </script>
-
