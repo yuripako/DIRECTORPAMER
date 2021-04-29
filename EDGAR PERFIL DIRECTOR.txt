@@ -8,9 +8,9 @@ DirectorPamerController.php
 
 OBS: SIEMPRE CHANTA EL CONTROLADOR
 ==========JS============================
-
+SUBIR JS
 ==========VIEW==========================
-
+SUBIR CTP
 ==========RUTA PARCIAL==========================
 RUTA : 
 

@@ -950,37 +950,52 @@
 	<body>
 		<div class="general">
 			<div class="reporte-asistencia">
-				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / PROCESOS DE TUTORÍA /<a class="enlace" href="#" target="_self"> INGRESO DE NOTA ESCOLAR</a></div>
+				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / PROCESOS ADMINISTRADOS /<a class="enlace" href="#" target="_self">META DE SALONES</a></div>
 				<div class="barra-filtro">
 					<div class="listado-custom" custom="salones-listado"></div>
 					<div class="listado-custom" custom="alumnos-listado"></div>
+				
+				</div>
+				<div class="cuadro-contenido">
 					<div class="base1">
 						<div class="fondo1">
 							<div class="centro1">
-                            
-							
-                            <div class="salon" >
-									<div class="arriba">
-										<div class="texto">CICLO</div>
-									</div>
-                                    <div class="abajo">
-										<div class="form-group" style="margin-top: 10px;">
-										<select name="" id="loadciclo"  class="form-control" onchange="tecargolinea()" >
-                                              
-											</select>
-											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
-												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
+								<div class="titulo">
+									<div class="izquierda">
+										
+										
+										
+										<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+											
+
+										<div class="salon" >
+											<div class="arriba">
+												<div class="texto">CICLO</div>
+											</div>
+											<div class="abajo">
+												<div class="form-group" style="margin-top: 10px;">
+												<select name="" id="loadciclo"  class="form-control" onchange="tecargolinea()" >
+													
+													</select>
+													<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
+														border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
                            
-                                <div class="alumno">
+
+										</div>
+										
+
+									
+									<div class=" col-md-4 ">
+									<div class="alumno">
 									<div class="arriba">
 										<div class="texto">LÍNEA</div>
 									</div>
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-										<select name="" id="lineal"  class="form-control"  >
+										<select name="" id="lineal"  class="form-control" onchange="metadatos()" >
 										</select>	
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
 												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
@@ -989,37 +1004,13 @@
 										</div>
 									</div>
 								</div>
+                                         
+										 
 
-								<div class="alumno">
-									<div class="arriba">
-										<div class="texto">CONSULTAR</div>
 									</div>
-									<div class="abajo">
-										<div class="form-group" style="margin-top: 10px;">
-											
+									
 										
-										<button onclick="centinela();" type="button" style="  color: #fff;  background-color: #005cfe;" class="btn btn-default" aria-label="Left Align">
-											<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> CONSULTAR
-										</button>
-                                        <input type="hidden" id="numero" >
 
-										</div>
-									</div>
-								</div>
-
-								<div class="extra">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="cuadro-contenido">
-					<div class="base1">
-						<div class="fondo1">
-							<div class="centro1">
-								<div class="titulo">
-									<div class="izquierda">
-										<div class="texto">Alumnos seleccionados.</div>
 									</div>
 									<div class="derecha">
 								<div class="asistencia">
@@ -1042,13 +1033,13 @@
 										</div>
 									</div>
 									<!-- INICIO TABLA-->
-									<div id="tblMerito" class="table-wrapper" style="height:500px; overflow:auto; width: 100%;" >
+									<div id="tblMerito" class="table-wrapper" style="height:600px; overflow:auto; width: 100%;" >
 										<table class="table table-bordered table-striped table-hover" id="tableprod">
 											<thead>
                                               <tr id="cabeza" style="    text-transform: uppercase;"></tr>
 												
 											</thead>
-											<tbody id="cuerpo" ">
+											<tbody id="cuerpo" style="font-size: 16px;">
 											</tbody>
 										</table>
 									</div>
@@ -1061,7 +1052,11 @@
 											<div class="imagen"><img src="../img/tutorimg/excel.png" /></div>
 											<div class="texto">Descargar</div>
 										</div>
-									
+										&nbsp;&nbsp;
+										<div class="boton"   onclick="reloadPage();">
+											<div class="imagen"><img width="32px" src="https://cdn.iconscoutmails.com/icon/free/png-128/reload-retry-again-update-restart-refresh-sync-17-3291.png" /></div>
+											<div class="texto">Actualizar</div>
+										</div>
 									
 									</div>
 								</div>

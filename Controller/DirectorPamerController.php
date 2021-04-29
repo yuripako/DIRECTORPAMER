@@ -40,7 +40,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirector.js?3121"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirector.js?'.uniqid().'"></script>');
     }
 
 
@@ -51,7 +51,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectormeritosalon.js?2313"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectormeritosalon.js?'.uniqid().'"></script>');
     }
 
 
@@ -62,7 +62,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectoreva.js?5"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectoreva.js?'.uniqid().'"></script>');
     }
 
     public function vistadirectoracademico() {  //RENDIMIENTO POR SALONES
@@ -72,7 +72,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectoracademico.js?11"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectoracademico.js?'.uniqid().'"></script>');
     }
 
     public function vistadirectorcuadropregunta() {  //CUADRO ESTADISTICA DE PREGUNTA
@@ -82,7 +82,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectorcuadropregunta.js?12"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectorcuadropregunta.js?'.uniqid().'"></script>');
     }
 
     public function vistadirectorasistencia() {  //CONTROL DE ASISTENCIA
@@ -92,7 +92,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectorasistencia.js?121"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistadirectorasistencia.js?'.uniqid().'"></script>');
         $this->set('objJS', '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />');
         $this->set('objJS', '<script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>');
         $this->set('objJS', '<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>');
@@ -107,7 +107,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistaseleccionado.js?14"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistaseleccionado.js?'.uniqid().'"></script>');
         $this->set('objJS', '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />');
         $this->set('objJS', '<script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>');
         $this->set('objJS', '<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>');
@@ -123,7 +123,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistasingresantes.js?12"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistasingresantes.js?'.uniqid().'"></script>');
         $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
     }
 
@@ -134,7 +134,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistasingresantesdetalle.js?3"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistasingresantesdetalle.js?'.uniqid().'"></script>');
         $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
     }
 
@@ -147,7 +147,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistameta.js?2"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistameta.js?'.uniqid().'"></script>');
         $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
     }
 
@@ -160,7 +160,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistanota.js?122"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistanota.js?'.uniqid().'"></script>');
         $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
     }
 
@@ -400,8 +400,9 @@ class DirectorPamerController extends AppController {
 
 
                         case 68:                          
-                                      
-                            $sql = "   CALL SP_SALONES_META() ";
+                            $codciclo =  $this->request->data['codciclo']; 
+                            $codlinea =  $this->request->data['codlinea'];       
+                            $sql = "   CALL SP_SALONES_META($codciclo,$codlinea) ";
                             exit(AppController::getDataTable($sql));  
                         break;
 
@@ -418,7 +419,14 @@ class DirectorPamerController extends AppController {
                             $sql = " CALL  SP_DIRECTOR_ALUMNOS_xxx_VISTANOTA($codciclo,$codlinea); ";
                             exit(AppController::getDataTable($sql));  
                         break;
+      
+                        //LINEA HUARACHIN
 
+                        case 71:                          
+                            $ciclo =  $this->request->data['ciclo'];                                       
+                            $sql = " CALL  SP_DIRECTOR_LINEA_X_CICLO($ciclo); ";
+                            exit(AppController::getDataTable($sql));  
+                        break;
 
                         
                     // ----------- FIN GET DE EDGAR -----------

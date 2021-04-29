@@ -1,26 +1,15 @@
-CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_DIRECTOR_ALUMNOS_xxx_VISTANOTA`(
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_SALONES_META`(
 _codciclo INT,
 _codlinea INT
 )
 BEGIN
-
-SELECT
-tbl1.codsalones, tbl1.codciclo,tbl1.nomlinea, tbl1.nomsalones,tbl1.tutor,tbl1.cantidad,
-tbl1.modificadopor,tbl1.nota
-FROM
-(
-SELECT
-b.codciclo,d.codlinea,d.nomlinea,b.codsalones, b.nomsalones, 
-CONCAT(a.apellidos," ",a.nombres) tutor,
-COUNT(DISTINCT alu.codalumno) cantidad,bb.nota,bb.modificadopor
-FROM tutores a
-LEFT  JOIN salones b on a.codtutor =b.codtutor
-LEFT JOIN ccostos c on c.codccostos= b.codccosto
+SELECT  
+a.codsalones,a.nomsalones,a.codciclo,b.meta 
+FROM salones a
+LEFT JOIN meta b on a.codsalones = b.codsalon
+LEFT JOIN ccostos c on c.codccostos= a.codccosto
 LEFT JOIN lineas d on d.codlinea=c.codlinea
-LEFT JOIN alumnos alu on alu.codsalon=b.codsalones
-LEFT JOIN  gein_notaescolar bb on bb.codalumno = alu.codalumno
-WHERE alu.codciclo=_codciclo  AND c.codlinea=_codlinea
-GROUP BY b.codsalones
-)tbl1
-GROUP BY tbl1.codsalones;
+
+WHERE
+a.codciclo=_codciclo AND d.codlinea=_codlinea;
 END

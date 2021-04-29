@@ -1,8 +1,5 @@
 $(document).ready(function () {
 
-
-
-
     combociclo();
     $("#buscar").on("keyup", function () {
         var value = $(this).val().toLowerCase();
@@ -13,6 +10,53 @@ $(document).ready(function () {
     });
     
     
+    function tecargolinea() {
+        var ciclo = $("#loadciclo").val();
+        cargandolinea(ciclo);
+      }
+      
+
+      function cargandolinea(ciclo) {
+  
+        var datosOK = "";
+        var strUrl = "getdatos/71";
+        $.ajax({
+            type: "post",
+            url: strUrl,
+            data:{
+              ciclo:ciclo
+            },
+            dataType: "html",
+            success: function (response) {
+                data = segdeNegocios(response);
+                datosOK = data.message.toUpperCase();
+         
+                if (datosOK == "OK") {
+                    var datos = data.data;
+                    var html11 = "";
+                  // console.log(datos);
+                  // html11 += "<option value='msj'>Seleccione</option>";
+                    $.each(datos, function(index, value) { 
+                        html11 += "<option value='"+datos[index][0]+" '>"+ datos[index][1]+"</option>"; 
+                    });
+        
+                    $("#lineal").html(html11);
+        
+                } else {
+                    viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
+                }
+            }
+        
+        
+        })
+      
+      
+      }
+      
+
+
+
+
     function combociclo() {
     
     var datosOK = "";
