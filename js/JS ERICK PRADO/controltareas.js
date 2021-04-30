@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	conbosalon();
 	mensajecaja();
+	combociclo();
 	$("#buscar").on("keyup", function () {
 		var value = $(this).val().toLowerCase();
 		$("#cuerpo tr  ").filter(function () {
@@ -8,6 +9,91 @@ $(document).ready(function () {
 		});
 	});
 });
+
+
+function combociclo() {
+    
+    var datosOK = "";
+    var strUrl = "getdatos/60";
+    $.ajax({
+        type: "post",
+        url: strUrl,
+        data:{
+           
+        },
+        dataType: "html",
+        success: function (response) {
+            data = segdeNegocios(response);
+            datosOK = data.message.toUpperCase();
+     
+            if (datosOK == "OK") {
+                var datos = data.data;
+                var html11 = "";
+              // console.log(datos);
+               html11 += "<option value='msj'>Seleccione</option>";
+                $.each(datos, function(index, value) { 
+                    html11 += "<option value='"+datos[index][0]+" '>"+ datos[index][0]+"</option>"; 
+                });
+    
+                $("#ciclo").html(html11);
+    
+            } else {
+                viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
+            }
+        }
+    
+    
+    })
+    
+    }
+
+    function tecargolinea() {
+        var ciclo = $("#ciclo").val();
+        cargandolinea(ciclo);
+      }
+      
+
+      function cargandolinea(ciclo) {
+  
+	//	alert(ciclo);
+        var datosOK = "";
+        var strUrl = "getdatos/71";
+        $.ajax({
+            type: "post",
+            url: strUrl,
+            data:{
+              ciclo:ciclo
+            },
+            dataType: "html",
+            success: function (response) {
+                data = segdeNegocios(response);
+                datosOK = data.message.toUpperCase();
+         
+                if (datosOK == "OK") {
+                    var datos = data.data;
+                    var html11 = "";
+                  // console.log(datos);
+                  // html11 += "<option value='msj'>Seleccione</option>";
+                    $.each(datos, function(index, value) { 
+                        html11 += "<option value='"+datos[index][0]+" '>"+ datos[index][1]+"</option>"; 
+                    });
+        
+                    $("#lineadet").html(html11);
+        
+                } else {
+                    viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
+                }
+            }
+        
+        
+        })
+      
+      
+      }
+
+
+
+
 
 function conbosalon() {
 	var datosOK = "";
@@ -199,6 +285,8 @@ var linea = $("#lineadet").val();
 }
 
 function metododetalle(semana) {
+	$("#tblMerito").hide(10);
+    $("#cuerpoload").show(10);
 	var ciclo = $("#ciclo").val();
 	var linea = $("#lineadet").val();
 	//$("#codexamens").val(codexamen);
@@ -227,8 +315,9 @@ function metododetalle(semana) {
 				var html4 = "";
 				var longitud = datos.length;
 
+				console.log(datos);
 
-		    	let cursos = [];
+				let cursos = [];
 				let cursoarray = [];
 
              	cursos = datos[0][3];
@@ -246,46 +335,30 @@ function metododetalle(semana) {
 					
 				}
 
-				var color ="";
-
-				color+="<td></td><td></td><td><div class='circulo' opcion='inasistencia' style='background-color: #24d483'></div><div class='circulo' opcion='inasistencia' style='background-color: red;'></div><div class='circulo' opcion='inasistencia' style='background-color: #ccc;'></div></td>"
-
-				let notas = [];
-				let notasarray = [];
-
-				notas =  datos[0][4];
-				let substrings3 = notas.split("|");
-				notasarray=substrings3;
-				console.log(notasarray);
-				console.log(notasarray.length);
-				var notacur="";
 
 
-				for (let not = 0; not < notasarray.length; not++) {
-					
-					notacur+="<td>"+notasarray[not]+"</td>";
-					
-				}
+				var headdet="<th>TUTOR</th><th>SALON</th><th>CURSOS</th>";
+				
 
-
+                var col ="";
 				$.each(datos, function (index, value) {
-					
-					// arr[index]=datos[index][0];
-					// html4 += "<th>" + datos[index][0] + "<br><span style='"+col1+"'> O </span><span style='"+col2+"'> O </span> <span style='"+col3+"'> O </span> </th>";
-					html4 += "<tr>"+color+"<tr>";
-					html4 += "<tr>";
-					html4 += "<td>" + datos[index][0] +"</td><td>" + datos[index][2] +"</td>"+ notacur;
-					html4 += "<tr>";
-					
-					// html4+="<td>"+datos[index][0]+"</td>";
-				});
-				// html4 += "<th style='BACKGROUND-COLOR: aqua;'>TOTAL<br><span style='"+col1+"'> O </span><span style='"+col2+"'> O </span> <span style='"+col3+"'> O</span> </th></th>";
-			//   $("#cabeza").html(head);
-				// bodydata(codsemana, longitud,arr);
-				//   custoncolumnas(codexamen);
-				$("#cabezadt").html(head);
-				$("#cuerpo").html(html4);
+                col+="<tr>";
+				col+="<td><span><table><tr><th></th></tr><tr><td>"+datos[index][1]+"</td></tr></table></span></td>";
+				col+="<td><span><table><tr><th></th></tr><tr><td>"+datos[index][3]+"</td></tr></table></span></td>";
 
+				col+="<td><span><table><tr><th colspan='3'>"+datos[index][4]+"</th></tr><tr><td>"+datos[index][5]+"</td></tr></table></span></td>";
+
+
+				col+="</td>";
+
+
+			
+				});
+	
+				$("#cabezadt").html(headdet);
+				$("#cuerpo").html(col);
+				$("#tblMerito").show(10);
+				$("#cuerpoload").hide(10);
 			} else {
 				viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
 			}

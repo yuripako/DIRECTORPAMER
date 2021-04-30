@@ -43,6 +43,56 @@ function combociclo() {
 	});
 }
 
+function tecargolinea() {
+	var ciclo = $("#loadciclo").val();
+	cargandolinea(ciclo);
+  }
+  
+
+  function cargandolinea(ciclo) {
+
+	var datosOK = "";
+	var strUrl = "getdatos/71";
+	$.ajax({
+		type: "post",
+		url: strUrl,
+		data:{
+		  ciclo:ciclo
+		},
+		dataType: "html",
+		success: function (response) {
+			data = segdeNegocios(response);
+			datosOK = data.message.toUpperCase();
+	 
+			if (datosOK == "OK") {
+				var datos = data.data;
+				var html11 = "";
+			  // console.log(datos);
+			  // html11 += "<option value='msj'>Seleccione</option>";
+				$.each(datos, function(index, value) { 
+					html11 += "<option value='"+datos[index][0]+" '>"+ datos[index][1]+"</option>"; 
+				});
+	
+				$("#lineal").html(html11);
+	
+			} else {
+				viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
+			}
+		}
+	
+	
+	})
+  
+  
+  }
+  
+
+
+
+
+
+
+
 function loadtutores() {
 	var codciclo = $("#loadciclo").val();
 	var codlinea = $("#lineal").val();
@@ -230,6 +280,11 @@ function metodoslider(ciclo, linea) {
 }
 
 function metododetail(semana) {
+
+	$("#tblMerito").hide(10);
+    $("#cuerpoload").show(10);
+
+
 	var ciclo = $("#loadciclo").val(); //CICLO
 	var salon = $("#codsaloni").val(); //salon
 	var linea = $("#codlini").val(); //linea
@@ -284,10 +339,19 @@ function metododetail(semana) {
 				$.each(datos, function (index, value) {
 					//console.log(cabe);
 
-					boda += "<tr>";
-					boda += "<td>" + datos[index][0] + "</td>";
+					let str1 = datos[index][3];
+					let substringss = str1.split("|");
+					arr3 = substringss;
 
-					let str = datos[index][3];
+					for (let index3 = 0; index3 < numero; index3++) {
+
+						boda += "<tr>";
+						boda += "<td>" + arr3[index3] + "</td>";
+					}
+
+
+
+					let str = datos[index][4];
 					let substrings = str.split("|");
 					arr2 = substrings;
 					console.log(arr2);
@@ -324,6 +388,10 @@ function metododetail(semana) {
 				head += "<td>TOTAL</td>";
 				$("#cuerpa").html(boda);
 				$("#cabeza").html(head);
+
+				$("#tblMerito").show(10);
+				$("#cuerpoload").hide(10);
+
 			} else {
 				viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
 			}

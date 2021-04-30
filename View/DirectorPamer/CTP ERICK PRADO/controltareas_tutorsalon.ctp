@@ -945,7 +945,7 @@
 									</div>
                                     <div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-										<select name="" id="loadciclo"  class="form-control" >
+										<select name="" id="loadciclo"  class="form-control" onchange="tecargolinea()" >
                                               
 											</select>
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
@@ -961,11 +961,11 @@
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
 											<select name="lineal" id="lineal"  class="form-control" onchange="loadtutores();">
-                                                <option>Seleccionar</option>
+                                                <!-- <option>Seleccionar</option>
                                                 <option value="1">Católica Talento</option>
                                                 <option value="31">Virtual San Marcos</option>
                                                 <option value="36">Virtual UNI</option>
-                                                <option value="37">Virtual Privado</option>
+                                                <option value="37">Virtual Privado</option> -->
 											</select>
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
 												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>

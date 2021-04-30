@@ -944,11 +944,11 @@
 									</div>
                                     <div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-                                            <select name="ciclo" id="ciclo"  class="form-control" >
-                                                <option>Seleccionar</option>
+                                            <select name="ciclo" id="ciclo"  class="form-control" onchange="tecargolinea()">
+                                                <!-- <option>Seleccionar</option>
                                                 <option value="20212">20212</option>
                                                 <option value="20211">20211</option>
-                                                <option value="20203">20203</option>
+                                                <option value="20203">20203</option> -->
                                               
 											</select>
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
@@ -964,11 +964,11 @@
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
 											<select name="lineadet" id="lineadet"  class="form-control" onchange="metodoslider();">
-                                                <option>Seleccionar</option>
+                                                <!-- <option>Seleccionar</option>
                                                 <option value="1">Católica Talento</option>
                                                 <option value="31">Virtual San Marcos</option>
                                                 <option value="36">Virtual UNI</option>
-                                                <option value="37">Virtual Privado</option>
+                                                <option value="37">Virtual Privado</option> -->
 											</select>
 											<i class="glyphicon glyphicon-chevron-down" style="    background-color: #005afe;color: #fff;padding: 5px;
 												border-radius: 1em;font-size: 15px; margin-top: 3px;"></i>
