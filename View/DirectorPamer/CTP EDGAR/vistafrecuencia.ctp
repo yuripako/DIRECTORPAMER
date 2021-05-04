@@ -17,9 +17,7 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
         <style>
-    .ui-datepicker-calendar {
-        display: none;
-    }
+  
     </style>
 		<style type="text/css">
 			html, body{
@@ -950,7 +948,7 @@
 	<body>
 		<div class="general">
 			<div class="reporte-asistencia">
-				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / PROCESOS ADMINISTRADOS /<a class="enlace" href="#" target="_self">ALUMNOS SELECCIONADOS</a></div>
+				<div class="barra-enlace"><a href="/pamervirtual">INICIO</a> / OPCIONES / PROCESOS COMEERCIALES  /<a class="enlace" href="#" target="_self"> FRECUENCIA DE MATRÍCULA</a></div>
 				<div class="barra-filtro">
 					<div class="listado-custom" custom="salones-listado"></div>
 					<div class="listado-custom" custom="alumnos-listado"></div>
@@ -980,7 +978,7 @@
 									</div>
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
-											<select name="lineal" id="lineal"  class="form-control" onchange="metadatos()">
+											<select name="lineal" id="lineal"  class="form-control" onchange="habilitar()" >
                                                 <!-- <option>Seleccionar</option>
                                                 <option value="1">Católica Talento</option>
                                                 <option value="31">Virtual San Marcos</option>
@@ -995,7 +993,7 @@
 
 								<div class="alumno">
 									<div class="arriba">
-										<div class="texto">FECHA</div>
+										<div class="texto">FECHA DESDE</div>
 									</div>
 									<div class="abajo">
 										<div class="form-group" style="margin-top: 10px;">
@@ -1007,6 +1005,21 @@
 									</div>
 								</div>
 
+                                <div class="alumno">
+									<div class="arriba">
+										<div class="texto">FECHA HASTA</div>
+									</div>
+									<div class="abajo">
+										<div class="form-group" style="margin-top: 10px;">
+											
+										<input type="text" id="datepicker2" class="form-control" style="font-size: 16px;">
+											<i class="glyphicon glyphicon-calendar" style="    background-color: #005afe;color: #fff;padding: 5px;
+												border-radius: 1em;font-size: 15px; margin-top: 6px;"></i>
+										</div>
+									</div>
+								</div>
+
+
 								<div class="alumno">
 									<div class="arriba">
 										<div class="texto">CONSULTAR</div>
@@ -1015,7 +1028,7 @@
 										<div class="form-group" style="margin-top: 10px;">
 											
 										
-										<button onclick="centinela();" type="button" style="  color: #fff;  background-color: #005cfe;" class="btn btn-default" aria-label="Left Align">
+										<button id="consultar" onclick="centinela();" type="button" style="  color: #fff;  background-color: #005cfe;" class="btn btn-default" aria-label="Left Align">
 											<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> CONSULTAR
 										</button>
                                         <input type="hidden" id="numero" >
@@ -1036,7 +1049,7 @@
 							<div class="centro1">
 								<div class="titulo">
 									<div class="izquierda">
-										<div class="texto">Alumnos seleccionados.</div>
+										<div class="texto">Frecuencia de matrículas.</div>
 									</div>
 									<div class="derecha">
 								<div class="asistencia">
@@ -1059,7 +1072,7 @@
 										</div>
 									</div>
 									<!-- INICIO TABLA-->
-									<div id="tblMerito" class="table-wrapper" style="height:300px; overflow:auto; width: 100%;" >
+									<div id="tblMerito" class="table-wrapper" style="height:450px; overflow:auto; width: 100%;" >
 										<table class="table table-bordered table-striped table-hover" id="tableprod">
 											<thead>
                                               <tr id="cabeza" style="    text-transform: uppercase;"></tr>

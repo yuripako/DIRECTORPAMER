@@ -12,11 +12,11 @@ SUBIR JS
 ==========VIEW==========================
 SUBIR CTP
 ==========RUTA PARCIAL==========================
-RUTA : 
+RUTA : http://localhost/pamervirtual/DirectorPamer/vistafrecuencia
 
 
 ==========NOMBRE DEL MENU================
-
+ FRECUENCIA DE MATRÍCULA
 
 
 ==========STORE PROCEDURE RUTA =============================

@@ -163,6 +163,16 @@ class DirectorPamerController extends AppController {
         $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistanota.js?'.uniqid().'"></script>');
         $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
     }
+    
+    public function vistafrecuencia() {  // FRECUENCIA DE NOTA
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/vistafrecuencia.js?'.uniqid().'"></script>');
+        $this->set('objJS', '<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>');
+    }
 
 
 
@@ -428,7 +438,15 @@ class DirectorPamerController extends AppController {
                             exit(AppController::getDataTable($sql));  
                         break;
 
-                        
+                        //LINEA FRECUENCIA
+                        case 72:                          
+                        $codciclo =  $this->request->data['codciclo'];    
+                        $codlinea =  $this->request->data['codlinea'];   
+                        $fechacalendar1  =  $this->request->data['fechacalendar1'];   
+                        $fechacalendar2  =  $this->request->data['fechacalendar2'];                                      
+                        $sql = " CALL SP_DIRECTOR_xxx_FRECUENCIA( $codciclo, $codlinea,'".$fechacalendar1."','".$fechacalendar2."'); ";
+                        exit(AppController::getDataTable($sql));  
+                        break;
                     // ----------- FIN GET DE EDGAR -----------
 
 

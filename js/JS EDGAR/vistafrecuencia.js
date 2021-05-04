@@ -1,27 +1,39 @@
 $(document).ready(function () {
 
 
+    document.getElementById("lineal").disabled = true;
+    document.getElementById("datepicker").disabled = true;
+    document.getElementById("datepicker2").disabled = true;
+    document.getElementById("consultar").disabled = true;
+
     $("#datepicker").datepicker({
         closeText: 'Cerrar',
-		prevText: '<Ant',
-		nextText: 'Sig>',
-		currentText: 'Hoy',
-		monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-		monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-        changeMonth: true,
-        changeYear: true,
-        showButtonPanel: true,
-        dateFormat: 'MM yy',    
-        onClose: function(dateText, inst) {   
-
-        $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-
-           var num = (inst.selectedMonth);
-           $("#numero").val(num);
-       }
-    
-
+        prevText: '<Ant',
+        nextText: 'Sig>',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'dd-mm-yy'
     });
+
+    $("#datepicker2").datepicker({
+        closeText: 'Cerrar',
+        prevText: '<Ant',
+        nextText: 'Sig>',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'dd-mm-yy'
+    });
+
 
 combociclo();
 $("#buscar").on("keyup", function () {
@@ -33,6 +45,11 @@ $("#buscar").on("keyup", function () {
 });
 
 
+function habilitar() {
+    document.getElementById("datepicker").disabled = false;
+    document.getElementById("datepicker2").disabled = false;
+    document.getElementById("consultar").disabled = false;
+}
 
 
 function combociclo() {
@@ -73,6 +90,7 @@ $.ajax({
 
 
 function tecargolinea() {
+    document.getElementById("lineal").disabled = false;
     var ciclo = $("#loadciclo").val();
     cargandolinea(ciclo);
   }
@@ -97,7 +115,8 @@ function tecargolinea() {
                 var datos = data.data;
                 var html11 = "";
               // console.log(datos);
-              // html11 += "<option value='msj'>Seleccione</option>";
+               html11 += "<option value='msj'>Seleccione</option>";
+              
                 $.each(datos, function(index, value) { 
                     html11 += "<option value='"+datos[index][0]+" '>"+ datos[index][1]+"</option>"; 
                 });
@@ -126,10 +145,16 @@ $("#cuerpoload").show(10);
 
 var codciclo= $("#loadciclo").val();
 var codlinea= $("#lineal").val();
+
 var fecha= $("#datepicker").val();
 var fechaini = fecha.split("-");
-var fechacalendar = fechaini[2]+"-"+fechaini[1]+"-"+fechaini[0]
-// alert(fechacalendar);
+var fechacalendar1 = fechaini[2]+"-"+fechaini[1]+"-"+fechaini[0]
+
+var fecha2= $("#datepicker2").val();
+var fechafini2 = fecha2.split("-");
+var fechacalendar2 = fechafini2[2]+"-"+fechafini2[1]+"-"+fechafini2[0]
+
+//  alert(fechacalendar1+" "+fechacalendar2);
 
 var mes = $("#numero").val();
 
@@ -138,14 +163,15 @@ meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septie
 
 
 var datosOK = "";
-var strUrl = "getdatos/64";
+var strUrl = "getdatos/72";
 $.ajax({
     type: "post",
     url: strUrl,
     data:{
         codciclo:codciclo,
         codlinea:codlinea,
-        meses:meses[mes]
+        fechacalendar1:fechacalendar1,
+        fechacalendar2:fechacalendar2     
     },
     dataType: "html",
     success: function (response) {
@@ -168,25 +194,27 @@ $.ajax({
            }
 
     head+="<th  style='text-align: center;background-color: azure;'>ID</th>";
-    head+="<th  style='text-align: left;background-color: azure;'>MES</th>";
-    head+="<th  style='text-align: left;background-color: azure;'>CICLO</th>";
-    head+="<th  style='text-align: left;background-color: azure;'>LINEA</th>";
-    head+="<th  style='text-align: left;background-color: azure;'>TUTOR</th>";
-    head+="<th  style='text-align: left;background-color: azure;'>SALON</th>";
-    head+="<th  style='text-align: left;background-color: azure;'>N° ALUMNOS</th>";
-    head+="<th  style='text-align: left;background-color: azure;'>N° SELECCIONADOS</th>";
+    head+="<th  style='background-color: azure;'>FECHA</th>";
+    head+="<th  style='background-color: azure;'>ACTIVO</th>";
+    head+="<th  style='text-align: left;background-color: azure;'>PENDIENTE PAGO</th>";
+    head+="<th  style='text-align: left;background-color: azure;'>RETIRADOS</th>";
+    head+="<th  style='text-align: left;background-color: azure;'>ELIM/ANUL</th>";
+    head+="<th  style='text-align: left;background-color: azure;'>TOTAL</th>";
      
     $.each(datos, function(index, value) { 
+
+    if (datos[index][3]=="") {
+        datos[index][3]=0;
+    }
         
     body+="<tr >";
     body+="<td style='text-align: center;'>"+(index+1)+"</td>";
-    body+="<td style='text-align: left;'>"+datos[index][0]+"</td>";
-    body+="<td style='text-align: left;'>"+datos[index][1]+"</td>";
-    body+="<td style='text-align: left;'>"+datos[index][2]+"</td>";
-    body+="<td style='text-align: left;'>"+datos[index][3]+"</td>";
-    body+="<td style='text-align: left;'>"+datos[index][4]+"</td>";
-    body+="<td style='text-align: left;'>"+datos[index][5]+"</td>";
-    body+="<td style='text-align: left;'>"+datos[index][6]+"</td>";
+    body+="<td >"+datos[index][0]+"</td>";
+    body+="<td >"+datos[index][1]+"</td>";
+    body+="<td >"+datos[index][2]+"</td>";
+    body+="<td ></td>";
+    body+="<td ></td>";
+    body+="<td >"+(parseInt(datos[index][1])+parseInt(datos[index][2]))+"</td>";
     body+="</tr>";
          
        console.log(datos);
