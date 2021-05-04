@@ -1,15 +1,42 @@
-CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_SALONES_META`(
-_codciclo INT,
-_codlinea INT
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_DIRECTOR_xxx_FRECUENCIA`(
+ _codciclo INT,
+ Intlinea INT,
+_fini VARCHAR(11),
+_ffini VARCHAR(11)
 )
 BEGIN
-SELECT  
-a.codsalones,a.nomsalones,a.codciclo,b.meta 
-FROM salones a
-LEFT JOIN meta b on a.codsalones = b.codsalon
-LEFT JOIN ccostos c on c.codccostos= a.codccosto
-LEFT JOIN lineas d on d.codlinea=c.codlinea
+set @nuevalinea=0;
 
-WHERE
-a.codciclo=_codciclo AND d.codlinea=_codlinea;
+if(Intlinea= 33) then  set @nuevalinea=2; end if;
+if(Intlinea= 31) then  set @nuevalinea=3; end if;
+if(Intlinea= 36) then  set @nuevalinea=4; end if;
+if(Intlinea= 1) then  set @nuevalinea=Intlinea; end if;
+if(Intlinea= 32) then  set @nuevalinea=3; end if;
+if(Intlinea= 39) then  set @nuevalinea=4; end if;
+if(Intlinea= 37) then  set @nuevalinea=37; end if;
+if(Intlinea= 46) then  set @nuevalinea=46; end if;
+
+
+select 
+tbl.fecpago,
+count(if(estado = 'A',1,NULL)) as pagados,
+count(if(tbl.pago_1cuota = 'P',1,NULL)) as pendiente
+from( 
+select 
+
+amn.codciclo,amn.pago_1cuota ,c.pago,c.fecpago,
+COALESCE((CASE WHEN c.pago > 0 AND c.fecpago != '0000-00-00' THEN 'A' ELSE 'P' END),'') as estado
+-- select *
+from academias_matriculas_nuevos amn
+left join comprom c on amn.cupon_1cuota = c.lincomprom
+-- left join lineas_maestros l on l.idmaestro = amn.codlinea 
+WHERE amn.codalumno IS NOT NULL 
+AND amn.codciclo IS NOT NULL
+and amn.codciclo = _codciclo AND amn.codlinea=@nuevalinea  AND 
+(c.fecpago BETWEEN _fini AND _ffini)
+order by c.fecpago asc
+) as tbl
+group by tbl.fecpago;
+
+
 END
