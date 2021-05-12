@@ -15,21 +15,21 @@ $(function() {
     carga_inicial();
     loadTipoAlumno();
 });
-
 function loadTipoAlumno(){
     
         var datosOK = "";
         var aParam = '';
-        var strUrl = "getdatos/106";
+        var strUrl = "getdatos/112";
         aParam = segenNegocios(aParam);
         $.post(strUrl, { "objJSON": aParam }, null, "html").done(function(data, textStatus, jqXHR) {
                 data = segdeNegocios(data);
+
                 datosOK = data.message.toUpperCase();
                 if (datosOK == "OK") {
-                    var vCiclos = data.data;
-                    var vHtml = '<li onclick="getReporte(\'TODOS\',this)">TODOS</li>';
-                    $.each(vCiclos, function(index, value) {
-                        vHtml += '<li onclick="getReporte(\''+vCiclos[index]+'\',this)">'+vCiclos[index]+'</li>';
+                    var datos = data.data;
+                    var vHtml = '';
+                    $.each(datos, function(index, value) {
+                        vHtml += '<li onclick="getReporte(\''+datos[index]['key']+'\',this)">'+datos[index]['tex']+'</li>';
                     });
                     $("#preloader").hide(10);
                     $("#selectTipo").html(vHtml);
@@ -45,7 +45,6 @@ function loadTipoAlumno(){
                 reLogin(datosOK);
             });
 }
-
 function carga_inicial() {
     var datosOK = "";
     var aParam = '';
@@ -103,7 +102,7 @@ function getLineas(valor,e){
                 var datos = data.data;
                 var vHtml = "";
                 $.each(datos, function(index, value) { 
-                    vHtml += '<li onclick="loadtutores('+datos[index][0]+',this,null)">'+datos[index][1]+'</li>';
+                    vHtml += '<li onclick="loadtutores('+datos[index][0]+',this)">'+datos[index][1]+'</li>';
                 });
                 $("#selectLinea").html(vHtml);
                 $('#selectLinea').prev().text('Seleccionar');
@@ -140,7 +139,7 @@ function loadtutores(valor,e) {
                 var datos = data.data;
                 var vHtml = "";
                 $.each(datos, function(index, value) { 
-                    vHtml += '<li onclick="loadsalones('+datos[index][1]+',this)">'+datos[index][2]+'</li>'; 
+                    vHtml += '<li onclick="loadsalones('+datos[index][0]+',this)">'+datos[index][2]+'</li>';
                 });
                 $("#selectTutor").html(vHtml);
                 $('#selectTutor').prev().text('Seleccionar');
@@ -152,17 +151,19 @@ function loadtutores(valor,e) {
 }
 
 
-function loadsalones(cosalones) {
+function loadsalones(codTutor) {
     $('#selectSalon').prev().text('Cargando...');
     $('#selectSalon').attr('data-value','');
+    var codCiclo = $('#selectCiclo').attr('data-value');
+    var codLinea = $('#selectLinea').attr('data-value');
     var datosOK = "";
-    var strUrl = "getdatos/51";
+    var strUrl = "getdatos/113";
+    var aParam = '{"codlinea":"'+codLinea+'","codtutor":"' + codTutor + '","codciclo":"' + codCiclo + '"}';
+    var postParam = segenNegocios(aParam);
     $.ajax({
         type: "post",
         url: strUrl,
-        data:{
-            cosalones:cosalones
-        },
+        data: {"objJSON":postParam},
         dataType: "html",
         success: function (response) {
             data = segdeNegocios(response);
@@ -172,7 +173,7 @@ function loadsalones(cosalones) {
                 var datos = data.data;
                 var vHtml = "";
                 $.each(datos, function(index, value) { 
-                    vHtml += '<li onclick="loadReporte('+datos[index][0]+',this,null);" >'+ datos[index][3]+" - "+ datos[index][1]+'</li>'; 
+                    vHtml += '<li onclick="loadReporte('+datos[index][0]+',this);" >'+ datos[index][3]+" - "+ datos[index][1]+'</li>'; 
                 });
                 $("#selectSalon").html(vHtml);
                 $('#selectSalon').prev().text('Seleccionar');
@@ -192,66 +193,117 @@ function getReporte(tipo,e){
         loadReporte(codsalon,null,tipo);
     }
 }
-function loadReporte(valor,e,tipo) {
-        if(tipo== null){
-            tipo = $("#selectTipo").attr('data-value');
-            $(e).parent().attr('data-value',valor);
-        }
-        var codsalon = valor;
-        var datosOK = "";
-        var strUrl = "getdatos/105";
-        var aParam = '';
-        $("#tbfrecuencia tbody").html('<tr><td colspan="3"><div id="cuerpoload" class="text-center"><div class="lds-ripple"><div></div><div></div></div></div></td></tr>');
-        $.ajax({
-            type: "post",
-            url: strUrl,
-            data:  {codsalon:codsalon,tipo:tipo},
-            dataType: "html",
-            success: function (response) {
-                data = segdeNegocios(response);
-                datosOK = data.message.toUpperCase();
-        
-                if (datosOK == "OK") {
-                    var datos = data.data;
-                    var vHtml = "";
-                    if(datos.length > 0){
-                        $.each(datos, function(index, value) { 
-                            vHtml += '<tr><td>0</td><td>'+datos[index][1]+'</td><td></td></tr>';
-                            vHtml += '<tr><td>1</td><td>'+datos[index][2]+'</td><td></td></tr>';
-                            vHtml += '<tr><td>2</td><td>'+datos[index][3]+'</td><td></td></tr>';
-                            vHtml += '<tr><td>3</td><td>'+datos[index][4]+'</td><td></td></tr>';
-                            vHtml += '<tr><td>4</td><td>'+datos[index][5]+'</td><td></td></tr>';
-                            vHtml += '<tr><td>5 a más</td><td>'+datos[index][6]+'</td><td></td></tr>';
-                            vHtml += '<tr><td style="background-color: #d9edf7;"><b>TOTAL</b></td><td style="background-color: #d9edf7;"><b>'+datos[index][0]+'</b></td><td></td></tr>';
-                        });
-                    }else{
-                        vHtml += '<tr><td colspan="3" style="text-align: center;padding: 20px 0;"><b>No se encontró información</b></td></tr>';
-                    }
-                    $("#tbfrecuencia tbody").html(vHtml);
-                    
-                } else {
-                    viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
-                }
+
+function loadReporte(codSalon,e,codTipoAlum){
+	if(codTipoAlum== null){
+        codTipoAlum = $("#selectTipo").attr('data-value');
+        $(e).parent().attr('data-value',codSalon);
+    }
+    var codsalon = codSalon;
+	var codLinea = $('#selectLinea').attr('data-value');
+	var codAlumno = 0;
+	var codArea = 0;
+    sChargeData();
+    var strUrl = "getdatos/110";
+    var datosOK = "";
+    var aParam = '{"codLinea":"'+codLinea+'","codSalon":"' + codSalon + '","codAlumno":"' + codAlumno + '","codArea":"' + codArea + '","tipoAlumno":"' + codTipoAlum + '"}';
+    aParam = segenNegocios(aParam);
+    $("#tblSimulacros").html('<div id="cuerpoload" class="text-center"><div class="lds-ripple"><div></div><div></div></div></div>');
+    $.post(strUrl,  {"objJSON": aParam}, null, "html")
+        .done(function (data, textStatus, jqXHR) {
+            data = segdeNegocios(data);
+            datosOK = data.message.toUpperCase();
+            if (datosOK == "OK") {
+
+                var table = eval(data.data[0].tableSim[0]);
+                $("#MyGrilla").show();
+                $("#tblSimulacros").html('<table id="tblReporteSimu" class="display" cellspacing="0" width="100%"></table>')
+                $('#tblReporteSimu').DataTable(table);
+
+                $("#tblReporteSimu").find('.clsAlumno').click(function(event) {
+                    $("#panProIng").hide();
+                    var codAlu = $(this).attr('codalu');
+                    var emaAlu = $(this).attr('emaalu');
+                    Get_Data_Probabilidad(codAlu,emaAlu);
+
+                    var aluNombre = $(this).text();
+                    var aluCarrera = $(this).parent().next().text();
+
+                    $("#panProIngDetallado .salon .abajo .texto").text(aluNombre);
+                    $("#panProIngDetallado .alumno .abajo .texto").text(aluCarrera);
+
+                    $("#panProIngDetallado").show();
+                });
+
+            } else {
+                $("#MyGrilla").hide();
+                toastr.error(data.data);
+                fChargeData();
             }
+            
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            fChargeData();
+            $("#MyGrilla").hide();
+            toastr.error("error al Cargar notas de Simulacro");
+        })
+        .always(function () {
+            
         });
 }
 
+function Get_Data_Probabilidad(codAlumno,emailAlumno){
+    var strUrl = "getdatos/120"; 
+    var datosOK = "";
+    var SCategoria = "";
+    var SMax = "";
+    var SMin = "";
+    var SPuntaje = "";
+    var aParam = '{"codAlumno":' + $.trim(codAlumno) + ',"emailAlumno":"' + $.trim(emailAlumno) + '"}';
+    aParam = segenNegocios(aParam);
+    $.post(strUrl,  {"objJSON": aParam}, null, "html")
+        .done(function (data, textStatus, jqXHR) {
+            data = segdeNegocios(data);
+            datosOK = data.message.toUpperCase();
+            if (datosOK == "OK") {
+                var datos = data.data[0];
+                $("#container").show();
+            } else {
+                $("#container").hide();
+            }
+            
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            $("#container").hide();
+            fChargeData();
+            toastr.error("error al Cargar notas de Simulacro");
+        })
+        .always(function () {
+            
+        });
+
+}
+
+function sChargeData() {
+	$('#loadingReporte').show();
+}
+function fChargeData() {
+	$('#loadingReporte').hide(5);
+}
 function viewToast(context, message){
     toastr.remove();
     toastr[context](message, '', {
         positionClass: 'toast-bottom-right'
     });
 }
-
 function fnExcelReport() {
 	    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
 	    var textRange; var j=0;
-	    tab = document.getElementById('tbfrecuencia'); // id of table
+	    tab = document.getElementById('tblReporteSimu'); // id of table
 	
 	    for(j = 0 ; j < tab.rows.length ; j++) 
 	    {     
 	        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
-	        //tab_text=tab_text+"</tr>";
 	    }
 	
 	    tab_text=tab_text+"</table>";
@@ -268,7 +320,7 @@ function fnExcelReport() {
 	        txtArea1.document.write(tab_text);
 	        txtArea1.document.close();
 	        txtArea1.focus(); 
-	        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+	        sa=txtArea1.document.execCommand("SaveAs",true,"probabilidades.xls");
 	    }  
 	    else                 //other browser not tested on IE 11
 		sa = window.open('data:application/vnd.ms-excel;base64,' + $.base64.encode(tab_text));

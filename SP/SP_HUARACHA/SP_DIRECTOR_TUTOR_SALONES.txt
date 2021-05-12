@@ -1,0 +1,13 @@
+CREATE PROCEDURE `pamervirtual`.`SP_DIRECTOR_TUTOR_SALONES`(
+	intTutor int,
+	intCiclo int,
+	intLinea int
+)
+BEGIN
+	
+	select s.codsalones,s.nomsalones,s.codciclo , l.nomlinea,l.codlinea
+	from ccostos cc
+	inner join lineas l on cc.codlinea = l.codlinea
+	inner join salones s on  s.codccosto = cc.codccostos
+	where  s.codtutor=intTutor and s.codciclo = intCiclo and l.codlinea = intLinea; 
+END
