@@ -1,0 +1,43 @@
+CREATE DEFINER=`developer2021`@`%` PROCEDURE `SP_DIRECTOR_PROYECCION_MATRICULA`(
+_codciclo INT
+)
+BEGIN
+
+SELECT
+tblprincipal.nomlinea,tblbecados.becados,tblprincipal.pendiente,tblprincipal.pagados
+FROM
+(
+select 
+tbl.nomlinea, count(if(estado = 'P',1,NULL)) as pendiente, count(if(estado = 'A',1,NULL)) as pagados
+from( 
+select 
+amn.codciclo,amn.codlinea, l.nomlinea ,c.pago,c.fecpago,
+COALESCE((CASE WHEN c.pago > 0 AND c.fecpago != '0000-00-00' THEN 'A' ELSE 'P' END),'') as estado
+from academias_matriculas_nuevos amn
+left join comprom c on amn.cupon_1cuota = c.lincomprom
+left join lineas l on l.codlinea = amn.codlinea 
+WHERE amn.codalumno IS NOT NULL 
+AND amn.codciclo IS NOT NULL
+AND l.nomlinea IS NOT NULL
+and amn.codciclo = _codciclo
+order by c.pago asc
+) as tbl
+group by codlinea
+)tblprincipal
+
+LEFT JOIN(
+	SELECT 
+	li.nomlinea linea,
+	COUNT(a.codalumno) becados
+	FROM 
+	alumnos a
+	left join ccostos as cc  on a.codccosto=cc.codccostos
+	left join lineas as li on cc.codlinea=li.codlinea
+	WHERE 
+	a.codciclo = _codciclo
+	AND a.codtipopag 
+	IN(SELECT codtipopag FROM alumnos_tipopag WHERE grupodes="BECA")
+	GROUP BY 1
+)tblbecados on tblbecados.linea = tblprincipal.nomlinea;
+
+END

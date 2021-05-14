@@ -13,7 +13,7 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/controltareas.js?212"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/controltareas.js?'.uniqid().'"></script>');
     }
 
     public function controltareas_tutorsalon() {
@@ -23,10 +23,18 @@ class DirectorPamerController extends AppController {
         $this->set('titPage', '');
         $this->set('subTitPage', ' '.date("Y"));
         $this->set('objJS', '<!-- Css -->');
-        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/controltareas_tutorsalon.js?212"></script>');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/controltareas_tutorsalon.js?'.uniqid().'"></script>');
     }
 
-
+    public function matriculasdiarias() {
+        
+        AppController::isAuthorized();
+        $this->layout = 'pages';
+        $this->set('titPage', '');
+        $this->set('subTitPage', ' '.date("Y"));
+        $this->set('objJS', '<!-- Css -->');
+        $this->set('piePag', '<!-- Java -->'.'<script src="../js/librerias/matriculasdiarias.js?'.uniqid().'"></script>');
+    }
 
     // ----------- FIN METODOS DE ERICK PRADO -----------
     
@@ -264,6 +272,12 @@ class DirectorPamerController extends AppController {
                         $semana = $this->request->data['semana'];
                         $salon = $this->request->data['salon'];
                         $sql = "CALL SP_DIRECTOR_SEMANA_TAREA_DET_TUTORSALON($ciclo,$linea,$semana,$salon)";
+                        exit(AppController::getDataTable($sql));  
+                    break;
+
+                    case 4: //7 nuevo
+                        $codciclo = $this->request->data['codciclo'];
+                        $sql = "CALL SP_DIRECTOR_PROYECCION_MATRICULA($codciclo)";
                         exit(AppController::getDataTable($sql));  
                     break;
 

@@ -10,90 +10,81 @@ $(document).ready(function () {
 	});
 });
 
-
 function combociclo() {
-    
-    var datosOK = "";
-    var strUrl = "getdatos/60";
-    $.ajax({
-        type: "post",
-        url: strUrl,
-        data:{
-           
-        },
-        dataType: "html",
-        success: function (response) {
-            data = segdeNegocios(response);
-            datosOK = data.message.toUpperCase();
-     
-            if (datosOK == "OK") {
-                var datos = data.data;
-                var html11 = "";
-              // console.log(datos);
-               html11 += "<option value='msj'>Seleccione</option>";
-                $.each(datos, function(index, value) { 
-                    html11 += "<option value='"+datos[index][0]+" '>"+ datos[index][0]+"</option>"; 
-                });
-    
-                $("#ciclo").html(html11);
-    
-            } else {
-                viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
-            }
-        }
-    
-    
-    })
-    
-    }
+	var datosOK = "";
+	var strUrl = "getdatos/60";
+	$.ajax({
+		type: "post",
+		url: strUrl,
+		data: {},
+		dataType: "html",
+		success: function (response) {
+			data = segdeNegocios(response);
+			datosOK = data.message.toUpperCase();
 
-    function tecargolinea() {
-        var ciclo = $("#ciclo").val();
-        cargandolinea(ciclo);
-      }
-      
+			if (datosOK == "OK") {
+				var datos = data.data;
+				var html11 = "";
+				// console.log(datos);
+				html11 += "<option value='msj'>Seleccione</option>";
+				$.each(datos, function (index, value) {
+					html11 +=
+						"<option value='" +
+						datos[index][0] +
+						" '>" +
+						datos[index][0] +
+						"</option>";
+				});
 
-      function cargandolinea(ciclo) {
-  
+				$("#ciclo").html(html11);
+			} else {
+				viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
+			}
+		},
+	});
+}
+
+function tecargolinea() {
+	var ciclo = $("#ciclo").val();
+	cargandolinea(ciclo);
+}
+
+function cargandolinea(ciclo) {
 	//	alert(ciclo);
-        var datosOK = "";
-        var strUrl = "getdatos/71";
-        $.ajax({
-            type: "post",
-            url: strUrl,
-            data:{
-              ciclo:ciclo
-            },
-            dataType: "html",
-            success: function (response) {
-                data = segdeNegocios(response);
-                datosOK = data.message.toUpperCase();
-         
-                if (datosOK == "OK") {
-                    var datos = data.data;
-                    var html11 = "";
-                  // console.log(datos);
-                  // html11 += "<option value='msj'>Seleccione</option>";
-                    $.each(datos, function(index, value) { 
-                        html11 += "<option value='"+datos[index][0]+" '>"+ datos[index][1]+"</option>"; 
-                    });
-        
-                    $("#lineadet").html(html11);
-        
-                } else {
-                    viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
-                }
-            }
-        
-        
-        })
-      
-      
-      }
+	var datosOK = "";
+	var strUrl = "getdatos/71";
+	$.ajax({
+		type: "post",
+		url: strUrl,
+		data: {
+			ciclo: ciclo,
+		},
+		dataType: "html",
+		success: function (response) {
+			data = segdeNegocios(response);
+			datosOK = data.message.toUpperCase();
 
+			if (datosOK == "OK") {
+				var datos = data.data;
+				var html11 = "";
+				// console.log(datos);
+				// html11 += "<option value='msj'>Seleccione</option>";
+				$.each(datos, function (index, value) {
+					html11 +=
+						"<option value='" +
+						datos[index][0] +
+						" '>" +
+						datos[index][1] +
+						"</option>";
+				});
 
-
-
+				$("#lineadet").html(html11);
+			} else {
+				viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
+			}
+		},
+	});
+}
 
 function conbosalon() {
 	var datosOK = "";
@@ -137,7 +128,7 @@ function conbosalon() {
 }
 
 function metodosalon() {
-    alert("Ahora elige un tipo de alumno.");
+	alert("Ahora elige un tipo de alumno.");
 	var cadena = $("#lineas").val();
 	var porciones = cadena.split("->");
 	var cadena22 = porciones[1].slice(0, 4); //separo fecha
@@ -146,11 +137,9 @@ function metodosalon() {
 	$("#lineaa").html(porciones[2]);
 	metodoarea(porciones[3]);
 	//alert(porciones[0]);
-	metodoslider(porciones[0],porciones[3]);
+	metodoslider(porciones[0], porciones[3]);
 	$("#codsalones").val(porciones[0]);
 	$("#codlinea").val(porciones[3]);
-
-
 }
 
 function metodoarea(linea) {
@@ -188,13 +177,9 @@ function metodoarea(linea) {
 	});
 }
 
-
-
-
 function metodoslider() {
-
-var ciclo = $("#ciclo").val();
-var linea = $("#lineadet").val();
+	var ciclo = $("#ciclo").val();
+	var linea = $("#lineadet").val();
 
 	var datosOK = "";
 	var strUrl = "getdatos/1";
@@ -203,7 +188,7 @@ var linea = $("#lineadet").val();
 		url: strUrl,
 		data: {
 			ciclo: ciclo,
-			linea: linea
+			linea: linea,
 		},
 		dataType: "html",
 		success: function (response) {
@@ -215,29 +200,26 @@ var linea = $("#lineadet").val();
 				var html3 = "";
 				let semana = [];
 				let arr2 = [];
-			
-			//	console.log(datos[0][1]);
+
+				//	console.log(datos[0][1]);
 
 				let str = datos[0][1];
 				let substrings = str.split("|");
-				arr2=substrings;
-			//	console.log(arr2.length);
+				arr2 = substrings;
+				//	console.log(arr2.length);
 
 				for (let index = 0; index < arr2.length; index++) {
-					
-
 					if (index < 3) {
-
 						if (index == 0) {
 							html3 +=
 								'  <div class="item" padrig="true">' +
 								'<div class="cuadrado activado" onclick=\'metododetalle("' +
-								arr2[index]+
+								arr2[index] +
 								'");\' );">' +
 								'<div class="semana">' +
 								'	<div class="texto">SEM</div>' +
 								'	<div class="numero">' +
-								(index+1) +
+								(index + 1) +
 								"</div>" +
 								"	</div>" +
 								"</div>" +
@@ -246,12 +228,12 @@ var linea = $("#lineadet").val();
 							html3 +=
 								'  <div class="item" padrig="true" >' +
 								'<div class="cuadrado " onclick=\'metododetalle("' +
-								arr2[index]+
+								arr2[index] +
 								'");\' );">' +
 								'<div class="semana">' +
 								'	<div class="texto">SEM</div>' +
 								'	<div class="numero">' +
-								(index+1) +
+								(index + 1) +
 								"</div>" +
 								"	</div>" +
 								"</div>" +
@@ -261,22 +243,20 @@ var linea = $("#lineadet").val();
 						html3 +=
 							'  <div class="item" style="display: none;" >' +
 							'<div class="cuadrado " onclick=\'metododetalle("' +
-							arr2[index]+
+							arr2[index] +
 							'");\' );">' +
 							'<div class="semana">' +
 							'	<div class="texto">SEM</div>' +
 							'	<div class="numero">' +
-							(index+1) +
+							(index + 1) +
 							"</div>" +
 							"	</div>" +
 							"</div>" +
 							"	</div>";
 					}
-				
-					$("#simu").html(html3);
-					
-				}
 
+					$("#simu").html(html3);
+				}
 			} else {
 				viewMessage("divMessage", "Alerta", data.data, "danger", "ban");
 			}
@@ -286,11 +266,11 @@ var linea = $("#lineadet").val();
 
 function metododetalle(semana) {
 	$("#tblMerito").hide(10);
-    $("#cuerpoload").show(10);
+	$("#cuerpoload").show(10);
 	var ciclo = $("#ciclo").val();
 	var linea = $("#lineadet").val();
 	//$("#codexamens").val(codexamen);
-//	$("#tblMerito").hide(10);
+	//	$("#tblMerito").hide(10);
 	//$("#cuerpoload").show(10);
 	var datosOK = "";
 	var strUrl = "getdatos/2";
@@ -300,62 +280,100 @@ function metododetalle(semana) {
 		data: {
 			ciclo: ciclo,
 			linea: linea,
-			semana: semana
+			semana: semana,
 		},
 		dataType: "html",
 		success: function (response) {
 			data = segdeNegocios(response);
 			datosOK = data.message.toUpperCase();
 
-            var col1="background-color: #24d483;; padding: 1px;color: #24d483;;border-radius: 50%; margin-right: 11px;";
-            var col2="background-color: RED; padding: 1px;color: RED;border-radius: 50%; margin-right: 11px;";
-            var col3="background-color: #ccc; padding: 1px;color: #ccc;border-radius: 50%; margin-right: 11px;";
+			var col1 =
+				"background-color: #24d483;; padding: 1px;color: #24d483;;border-radius: 50%; margin-right: 11px;";
+			var col2 =
+				"background-color: RED; padding: 1px;color: RED;border-radius: 50%; margin-right: 11px;";
+			var col3 =
+				"background-color: #ccc; padding: 1px;color: #ccc;border-radius: 50%; margin-right: 11px;";
 			if (datosOK == "OK") {
 				var datos = data.data;
 				var html4 = "";
 				var longitud = datos.length;
 
-				console.log(datos);
+				if (datos == "") {
+					alert("No se encontraron datos");
+					window.location.reload();
+				}
 
+				// console.log(datos);
+
+				
+
+				var col = "";
+
+				var head = "";
+
+				var det = "";
+
+				// Cabecera cursos
 				let cursos = [];
 				let cursoarray = [];
 
-             	cursos = datos[0][3];
+				cursos = datos[0][4];
 				let substrings2 = cursos.split("|");
-				cursoarray=substrings2;
-				console.log(cursoarray);
-				console.log(cursoarray.length);
-				var head="";
+				cursoarray = substrings2;
 
-				head+="<th>TUTOR</th>";
-				head+="<th>SALÓN</th>";
+
+
+				head += "z<th>TUTOR</th>";
+				head += "<th>SALÓN</th>";
 				for (let conta = 0; conta < cursoarray.length; conta++) {
-					
-					head+="<th>"+cursoarray[conta]+"</th>";
-					
+					head +=
+						"<th style='text-align: center;'>" + cursoarray[conta] + "</th>";
 				}
 
+				$.each(datos, function (index, value) {
 
+					
+					
 
-				var headdet="<th>TUTOR</th><th>SALON</th><th>CURSOS</th>";
+					// Detalle notas
+					let notas = [];
+					let notasarray = [];
+
+					notas = datos[index][5];
+					let substrings3 = notas.split("|");
+					notasarray = substrings3;
+					
+					col += "<tr>";
+					col += "<td>" + datos[index][1] + "</td>";
+					col += "<td>" + datos[index][3] + "</td>";
+
+					for (let cont1 = 0; cont1 < notasarray.length ; cont1++) {
+
+						let correcta = "";
+						let incorrecta = "";
+						let blanca = "";
+
+						let substrings4 = notasarray[cont1].split("-");
+
+						correcta = substrings4[0];
+						incorrecta = substrings4[1];
+						blanca = substrings4[2];
+
+						col +=
+						"<td  style='text-align: center;'><span style='color:#24d483;'>" +
+						parseInt(financial(correcta/15)) +
+							"</span> &nbsp; &nbsp; &nbsp; &nbsp;	<span style='color:red;'>" +
+							parseInt(financial(incorrecta/15)) +
+							"</span> &nbsp; &nbsp; &nbsp; &nbsp; <span style='color:#777;'>" +
+							parseInt(financial(blanca/15)) +
+							"</span></td>";
+					}
 				
 
-                var col ="";
-				$.each(datos, function (index, value) {
-                col+="<tr>";
-				col+="<td><span><table><tr><th></th></tr><tr><td>"+datos[index][1]+"</td></tr></table></span></td>";
-				col+="<td><span><table><tr><th></th></tr><tr><td>"+datos[index][3]+"</td></tr></table></span></td>";
-
-				col+="<td><span><table><tr><th colspan='3'>"+datos[index][4]+"</th></tr><tr><td>"+datos[index][5]+"</td></tr></table></span></td>";
-
-
-				col+="</td>";
-
-
-			
+					col += "</tr>";
 				});
-	
-				$("#cabezadt").html(headdet);
+
+				$("#cabezadt").html(head);
 				$("#cuerpo").html(col);
 				$("#tblMerito").show(10);
 				$("#cuerpoload").hide(10);
@@ -365,7 +383,6 @@ function metododetalle(semana) {
 		},
 	});
 }
-
 
 // function bodydata(codsemana, longitud,curso) {
 // 	console.log(curso);
@@ -397,7 +414,7 @@ function metododetalle(semana) {
 // 				if (datos == "") {
 // 					alert("NO SE ENCONTRO RESULTADOS.");
 // 				}
-		
+
 // 				/// IMPRESION DE EJEMPLO  curso
 // 				var html22="";
 // 				let arr2 = [];
@@ -407,21 +424,19 @@ function metododetalle(semana) {
 // 				    var ciclo=$("#cicloo").html();
 // 					var linea=$("#lineaa").html();
 // 					var tipo=$("#tipo").val();
-				
+
 //                     var url="codigo="+datos[index][0]+"&alumno="+datos[index][1]+"&ciclo="+ciclo+"&linea="+linea+"&tipo="+tipo;
 
 // 					html22+="<tr>";
 // 					html22+="<td>"+datos[index][0]+"</td>";
 // 					html22+="<td><a style='color:#005cfe' href='vistacontroldetalle?"+url+"'>"+datos[index][1]+"</a></td>";
-					
-//                     notas[index] = datos[index][0]
 
+//                     notas[index] = datos[index][0]
 
 // 					let str = datos[index][3];
 // 					let substrings = str.split("|");
 //                     arr2=substrings;
 // 					//console.log(arr2);
-
 
 // 					for (let index2 = 0; index2 < curso.length; index2++) {
 
@@ -430,18 +445,13 @@ function metododetalle(semana) {
 // 						  } else {
 // 							html22+="<td>"+arr2[index2]+"</td>";
 // 						  }
-						
-						
+
 // 					}
 
 // 					html22+="<td style='background-color: aqua;'><span style='margin-right: 7px;'>"+datos[index][4]+"</span><span style='margin-right: 7px;'> "+datos[index][5]+"</span><span style='margin-right: 7px;'> "+datos[index][6]+"</span></td>";
-				
+
 // 				});
 
-            
-
-
-			
 //                   $("#cuerpo").html(html22);
 // 				$("#tblMerito").show(10);
 // 				$("#cuerpoload").hide(10);
